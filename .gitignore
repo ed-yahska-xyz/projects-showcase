@@ -13,7 +13,6 @@ pkg/
 zig-out/
 zig-cache/
 .zig-cache/
-*.wasm
 
 # Environment
 .env
