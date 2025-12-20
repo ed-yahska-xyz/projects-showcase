@@ -7,8 +7,13 @@ node_modules/
 # Build output
 dist/
 build/
-*.wasm
 pkg/
+
+# Zig
+zig-out/
+zig-cache/
+.zig-cache/
+*.wasm
 
 # Environment
 .env
