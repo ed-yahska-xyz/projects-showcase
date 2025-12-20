@@ -46,7 +46,7 @@ const importObject = {
   }
 };
 
-WebAssembly.instantiateStreaming(fetch('./boids.wasm'), importObject).then((result) => {
+WebAssembly.instantiateStreaming(fetch('/boids/boids.wasm'), importObject).then((result) => {
   const exports = result.instance.exports;
   const alloc = exports.alloc;
   wasmMoveBoid = exports.moveBoid;
