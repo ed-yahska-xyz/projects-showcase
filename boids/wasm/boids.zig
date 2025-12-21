@@ -51,16 +51,38 @@ pub fn Vec2(T: type) type {
 
 const Vec2f = Vec2(f32);
 
-// Boids algorithm parameters
-const PERCEPTION_RADIUS: f32 = 50.0;
-const SEPARATION_RADIUS: f32 = 25.0;
-const MAX_SPEED: f32 = 4.0;
-const MAX_FORCE: f32 = 0.1;
-const SEPARATION_WEIGHT: f32 = 1.5;
-const ALIGNMENT_WEIGHT: f32 = 1.0;
-const COHESION_WEIGHT: f32 = 0.5;
-const FIELD_WEIGHT: f32 = 1.0;
-const BOUNDARY_MARGIN: f32 = 100.0; // Distance from edge where turning begins
+// Boids algorithm parameters (mutable, can be set via setParams)
+var perception_radius: f32 = 50.0;
+var separation_radius: f32 = 25.0;
+var max_speed: f32 = 4.0;
+var max_force: f32 = 0.1;
+var separation_weight: f32 = 1.5;
+var alignment_weight: f32 = 1.0;
+var cohesion_weight: f32 = 0.5;
+var field_weight: f32 = 1.0;
+var boundary_margin: f32 = 100.0; // Distance from edge where turning begins
+
+export fn setParams(
+    p_perception_radius: f32,
+    p_separation_radius: f32,
+    p_max_speed: f32,
+    p_max_force: f32,
+    p_separation_weight: f32,
+    p_alignment_weight: f32,
+    p_cohesion_weight: f32,
+    p_field_weight: f32,
+    p_boundary_margin: f32,
+) void {
+    perception_radius = p_perception_radius;
+    separation_radius = p_separation_radius;
+    max_speed = p_max_speed;
+    max_force = p_max_force;
+    separation_weight = p_separation_weight;
+    alignment_weight = p_alignment_weight;
+    cohesion_weight = p_cohesion_weight;
+    field_weight = p_field_weight;
+    boundary_margin = p_boundary_margin;
+}
 
 // var prng = std.rand.DefaultPrng.init(7777);
 // const rand = prng.random();
@@ -97,13 +119,13 @@ fn getFieldStrength(pos: Vec2f, field_dim: Vec2f) f32 {
     const min_dist = @min(min_x, min_y);
 
     // Only apply force within boundary margin
-    if (min_dist >= BOUNDARY_MARGIN) {
+    if (min_dist >= boundary_margin) {
         return 0.0;
     }
 
     // Strength increases as boid gets closer to edge (inverse relationship)
     // 0.0 at margin distance, 1.0 at edge
-    const t = 1.0 - (min_dist / BOUNDARY_MARGIN);
+    const t = 1.0 - (min_dist / boundary_margin);
 
     // Square for stronger response near edges
     return t * t;
@@ -120,19 +142,19 @@ fn getFieldAt(pos: Vec2f, field_dim: Vec2f) Vec2f {
     var result = Vec2f.init(0, 0);
 
     // Horizontal component: push away from left/right edges
-    if (dist_left < BOUNDARY_MARGIN) {
-        result.x += 1.0 - (dist_left / BOUNDARY_MARGIN);
+    if (dist_left < boundary_margin) {
+        result.x += 1.0 - (dist_left / boundary_margin);
     }
-    if (dist_right < BOUNDARY_MARGIN) {
-        result.x -= 1.0 - (dist_right / BOUNDARY_MARGIN);
+    if (dist_right < boundary_margin) {
+        result.x -= 1.0 - (dist_right / boundary_margin);
     }
 
     // Vertical component: push away from top/bottom edges
-    if (dist_top < BOUNDARY_MARGIN) {
-        result.y += 1.0 - (dist_top / BOUNDARY_MARGIN);
+    if (dist_top < boundary_margin) {
+        result.y += 1.0 - (dist_top / boundary_margin);
     }
-    if (dist_bottom < BOUNDARY_MARGIN) {
-        result.y -= 1.0 - (dist_bottom / BOUNDARY_MARGIN);
+    if (dist_bottom < boundary_margin) {
+        result.y -= 1.0 - (dist_bottom / boundary_margin);
     }
 
     // Add a slight tangent component for smoother turning (curves instead of hard bounces)
@@ -185,14 +207,14 @@ export fn moveBoid(b: [*]f32, length: usize, width: f32, height: f32) void {
             const dist = diff.length();
 
             // Separation: steer away from nearby boids
-            if (dist > 0 and dist < SEPARATION_RADIUS) {
+            if (dist > 0 and dist < separation_radius) {
                 const repel = diff.normalize().scale(1.0 / dist);
                 separation = separation.add(repel);
                 sep_count += 1;
             }
 
             // Alignment & Cohesion: consider boids within perception radius
-            if (dist > 0 and dist < PERCEPTION_RADIUS) {
+            if (dist > 0 and dist < perception_radius) {
                 alignment = alignment.add(other_vel);
                 align_count += 1;
 
@@ -206,35 +228,35 @@ export fn moveBoid(b: [*]f32, length: usize, width: f32, height: f32) void {
         // Apply separation
         if (sep_count > 0) {
             separation = separation.scale(1.0 / sep_count);
-            separation = separation.normalize().scale(MAX_SPEED);
-            separation = separation.sub(vel).limit(MAX_FORCE);
-            accel = accel.add(separation.scale(SEPARATION_WEIGHT));
+            separation = separation.normalize().scale(max_speed);
+            separation = separation.sub(vel).limit(max_force);
+            accel = accel.add(separation.scale(separation_weight));
         }
 
         // Apply alignment
         if (align_count > 0) {
             alignment = alignment.scale(1.0 / align_count);
-            alignment = alignment.normalize().scale(MAX_SPEED);
-            alignment = alignment.sub(vel).limit(MAX_FORCE);
-            accel = accel.add(alignment.scale(ALIGNMENT_WEIGHT));
+            alignment = alignment.normalize().scale(max_speed);
+            alignment = alignment.sub(vel).limit(max_force);
+            accel = accel.add(alignment.scale(alignment_weight));
         }
 
         // Apply cohesion
         if (cohesion_count > 0) {
             cohesion = cohesion.scale(1.0 / cohesion_count);
-            const desired = cohesion.sub(pos).normalize().scale(MAX_SPEED);
-            const steer = desired.sub(vel).limit(MAX_FORCE);
-            accel = accel.add(steer.scale(COHESION_WEIGHT));
+            const desired = cohesion.sub(pos).normalize().scale(max_speed);
+            const steer = desired.sub(vel).limit(max_force);
+            accel = accel.add(steer.scale(cohesion_weight));
         }
 
         const field_dir = getFieldAt(pos, field_dim);
         const field_strength = getFieldStrength(pos, field_dim);
-        field_force = field_dir.scale(field_strength * FIELD_WEIGHT);
+        field_force = field_dir.scale(field_strength * field_weight);
 
         accel = accel.add(field_force);
 
         // Update velocity
-        vel = vel.add(accel).limit(MAX_SPEED);
+        vel = vel.add(accel).limit(max_speed);
 
         // Update position
         var new_pos = pos.add(vel);

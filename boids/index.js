@@ -1,5 +1,4 @@
 // Constants
-const NUM_BOIDS = 500;
 const BOID_RADIUS = 5;
 const FLOATS_PER_BOID = 4; // x, y, vx, vy
 
@@ -21,6 +20,7 @@ const memory = new WebAssembly.Memory({
 let boidsPtr = null;
 let boidsData = null;
 let wasmMoveBoid = null;
+let numBoids = null;
 
 function throttle(func, timeFrame) {
   var lastTime = 0;
@@ -49,17 +49,35 @@ const importObject = {
 WebAssembly.instantiateStreaming(fetch('/boids/boids.wasm'), importObject).then((result) => {
   const exports = result.instance.exports;
   const alloc = exports.alloc;
+  const setParams = exports.setParams;
   wasmMoveBoid = exports.moveBoid;
 
-  // Allocate memory for boids: NUM_BOIDS * 4 floats (x, y, vx, vy)
-  const totalFloats = NUM_BOIDS * FLOATS_PER_BOID;
+  // Read params from URL query string
+  const params = readParams();
+  numBoids = params.noOfBoids;
+
+  // Set WASM parameters
+  setParams(
+    params.perceptionRadius,
+    params.separationRadius,
+    params.maxSpeed,
+    params.maxForce,
+    params.separationWeight,
+    params.alignmentWeight,
+    params.cohesionWeight,
+    params.fieldWeight,
+    params.boundaryMargin
+  );
+
+  // Allocate memory for boids: numBoids * 4 floats (x, y, vx, vy)
+  const totalFloats = numBoids * FLOATS_PER_BOID;
   boidsPtr = alloc(totalFloats);
 
   // Create a Float32Array view into WASM memory
   boidsData = new Float32Array(memory.buffer, boidsPtr, totalFloats);
 
   // Initialize boids with random positions and velocities
-  for (let i = 0; i < NUM_BOIDS; i++) {
+  for (let i = 0; i < numBoids; i++) {
     const idx = i * FLOATS_PER_BOID;
     boidsData[idx] = Math.random() * canvas.width;      // x
     boidsData[idx + 1] = Math.random() * canvas.height; // y
@@ -91,14 +109,14 @@ function update() {
 
   // Update boids using WASM
   if (wasmMoveBoid && boidsPtr) {
-    wasmMoveBoid(boidsPtr, NUM_BOIDS, canvas.width, canvas.height);
+    wasmMoveBoid(boidsPtr, numBoids, canvas.width, canvas.height);
   }
 
   // Draw boids
   ctx.fillStyle = "black";
   ctx.beginPath();
 
-  for (let i = 0; i < NUM_BOIDS; i++) {
+  for (let i = 0; i < numBoids; i++) {
     const idx = i * FLOATS_PER_BOID;
     const x = boidsData[idx];
     const y = boidsData[idx + 1];
@@ -118,4 +136,45 @@ function update() {
   ctx.stroke();
 
   requestAnimationFrame(update);
+}
+
+// Default values matching Zig defaults
+const DEFAULTS = {
+  noOfBoids: 500,
+  perceptionRadius: 50.0,
+  separationRadius: 25.0,
+  maxSpeed: 4.0,
+  maxForce: 0.1,
+  separationWeight: 1.5,
+  alignmentWeight: 1.0,
+  cohesionWeight: 0.5,
+  fieldWeight: 1.0,
+  boundaryMargin: 100.0
+};
+
+function readParams() {
+  const urlSearchParams = new URLSearchParams(window.location.search);
+
+  const getFloat = (key) => {
+    const val = urlSearchParams.get(key);
+    return val !== null ? parseFloat(val) : DEFAULTS[key];
+  };
+
+  const getInt = (key) => {
+    const val = urlSearchParams.get(key);
+    return val !== null ? parseInt(val, 10) : DEFAULTS[key];
+  };
+
+  return {
+    noOfBoids: getInt("noOfBoids"),
+    perceptionRadius: getFloat("perceptionRadius"),
+    separationRadius: getFloat("separationRadius"),
+    maxSpeed: getFloat("maxSpeed"),
+    maxForce: getFloat("maxForce"),
+    separationWeight: getFloat("separationWeight"),
+    alignmentWeight: getFloat("alignmentWeight"),
+    cohesionWeight: getFloat("cohesionWeight"),
+    fieldWeight: getFloat("fieldWeight"),
+    boundaryMargin: getFloat("boundaryMargin")
+  };
 }
