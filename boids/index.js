@@ -51,6 +51,7 @@ WebAssembly.instantiateStreaming(fetch('/boids/boids.wasm'), importObject).then(
   const alloc = exports.alloc;
   const setParams = exports.setParams;
   wasmMoveBoid = exports.moveBoid;
+  wasmresetBoids = exports.resetBoids;
 
   // Read params from URL query string
   const params = readParams();
@@ -88,17 +89,22 @@ WebAssembly.instantiateStreaming(fetch('/boids/boids.wasm'), importObject).then(
   init();
 });
 
+let animationRequestFrameId;
+
 window.addEventListener('resize', function () {
+  cancelAnimationFrame(animationRequestFrameId);
+  //resetBoids(boidsPtr, numBoids);
   throttle(init, 1000)();
 });
 
 function init() {
+  cancelAnimationFrame(animationRequestFrameId)
   container = document.querySelector('#app');
   canvas.height = container.clientHeight;
   canvas.width = container.clientWidth;
   effectiveWidth = canvas.width - margin;
   effectiveHeight = canvas.height - margin;
-  requestAnimationFrame(update);
+  animationRequestFrameId = requestAnimationFrame(update);
 }
 
 function update() {
@@ -135,7 +141,7 @@ function update() {
   ctx.fill();
   ctx.stroke();
 
-  requestAnimationFrame(update);
+  animationRequestFrameId = requestAnimationFrame(update);
 }
 
 // Default values matching Zig defaults
@@ -145,7 +151,7 @@ const DEFAULTS = {
   separationRadius: 25.0,
   maxSpeed: 4.0,
   maxForce: 0.1,
-  separationWeight: 1.5,
+  separationWeight: 1.0,
   alignmentWeight: 1.0,
   cohesionWeight: 0.5,
   fieldWeight: 1.0,

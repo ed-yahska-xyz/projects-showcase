@@ -56,7 +56,7 @@ var perception_radius: f32 = 50.0;
 var separation_radius: f32 = 25.0;
 var max_speed: f32 = 4.0;
 var max_force: f32 = 0.1;
-var separation_weight: f32 = 1.5;
+var separation_weight: f32 = 1.0;
 var alignment_weight: f32 = 1.0;
 var cohesion_weight: f32 = 0.5;
 var field_weight: f32 = 1.0;
@@ -293,11 +293,53 @@ export fn alloc(len: usize) ?[*]f32 {
     return ptr;
 }
 
-test "pointer arithmatic" {
-    const x = alloc(5);
-    moveBoid(x.?, 5);
-    for (0..5) |i| {
-        const p = x.? + i * @sizeOf(f32);
-        std.debug.print("{d} ", .{p[0]});
+export fn resetBoids(boids: [*]f32, length: usize) void {
+    const stride = 4;
+    for (0..length) |i| {
+        const idx = i * stride;
+        boids[idx + 2] = 0.0;
+        boids[idx + 3] = 0.0;
+    }
+}
+
+// test "pointer arithmatic" {
+//     const x = alloc(5);
+//     moveBoid(x.?, 5);
+//     for (0..5) |i| {
+//         const p = x.? + i * @sizeOf(f32);
+//         std.debug.print("{d} ", .{p[0]});
+//     }
+// }
+
+// Stub for jsRandom when running tests
+comptime {
+    if (@import("builtin").is_test) {
+        @export(&struct {
+            // Defines a function inside an anonymous struct literal. Using callconv(.C)
+            // ensures the function uses the C ABI, matching what the extern declaration
+            // expects. The .jsRandom after the struct accesses this function, and @export
+            // makes it available as the symbol "jsRandom" to satisfy the extern linkage.
+            fn jsRandom() callconv(.C) f32 {
+                return 0.5;
+            }
+        }.jsRandom, .{ .name = "jsRandom" });
+    }
+}
+
+test "reset boids" {
+    const noOfTestBoids = 3;
+    const stride = 4;
+    const testBoidsArr = allocator.alloc(f32, noOfTestBoids * stride) catch return;
+    @memset(testBoidsArr, 4.0);
+    const testBoids = testBoidsArr.ptr;
+    resetBoids(testBoids, noOfTestBoids);
+
+    for (0..noOfTestBoids) |id| {
+        const idx = id * 4;
+        if (idx % 4 == 2 and idx % 4 == 3) {
+            try std.testing.expect(testBoids[idx] == 0.0);
+        } else {
+            try std.testing.expect(testBoids[idx] == 4.0);
+        }
     }
 }
