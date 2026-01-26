@@ -76,12 +76,12 @@ function updateGridView() {
 }
 
 function draw() {
-  ctx.fillStyle = "#111";
+  ctx.fillStyle = "#fff";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   if (!gridData) return;
 
-  ctx.fillStyle = "#0f0";
+  ctx.fillStyle = "#ed254e";
 
   for (let y = 0; y < gridHeight; y++) {
     for (let x = 0; x < gridWidth; x++) {
