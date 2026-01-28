@@ -149,7 +149,7 @@ pub fn GameOfLife(comptime T: type) type {
             for (0..self.height) |y| {
                 for (0..self.width) |x| {
                     const isAlive = self.getCell(x, y);
-                    const makeAlive: T = if (randomBool() and randomBool()) 1 else 0;
+                    const makeAlive: T = if (randomBool() and randomBool() and randomBool() and randomBool()) 1 else 0;
                     if (isAlive == 0 and makeAlive == 1) {
                         self.setCell(x, y, 1);
                     }

@@ -65,7 +65,7 @@ WebAssembly.instantiateStreaming(fetch('/game-of-life/game-of-life.wasm'), impor
     // Add salt every 10 seconds
     setInterval(() => {
       wasmAddSalt();
-    }, 10000);
+    }, 20000);
   });
 
 function updateGridView() {
@@ -101,7 +101,9 @@ function update() {
   wasmStep();
   updateGridView();
   draw();
-  animationId = requestAnimationFrame(update);
+  setTimeout(() => {
+    animationId = requestAnimationFrame(update);
+  }, 64);
 }
 
 window.addEventListener('resize', resizeCanvas);
