@@ -119,7 +119,7 @@ function update() {
   }
 
   // Draw boids
-  ctx.fillStyle = "#EB162A";
+  ctx.fillStyle = "#901f3b";
   ctx.beginPath();
 
   for (let i = 0; i < numBoids; i++) {
