@@ -9,29 +9,25 @@ pub fn build(b: *std.Build) !void {
         .os_tag = .freestanding,
     });
 
-    const exe = b.addExecutable(.{
-        .name = "Boids",
+    const exe_module = b.createModule(.{
         .root_source_file = b.path("boids.zig"),
         .target = target,
         .optimize = .ReleaseSmall,
     });
 
+    const exe_options = b.addOptions();
+    exe_options.addOption(usize, "memory_size", wasm_max_memory);
+    exe_module.addOptions("build_options", exe_options);
+
+    const exe = b.addExecutable(.{
+        .name = "Boids",
+        .root_module = exe_module,
+    });
+
     exe.entry = .disabled;
-    //exe.global_base = 6560;
     exe.rdynamic = true;
     exe.import_memory = true;
     exe.import_symbols = true;
-    //exe.initial_memory = wasm_initial_memory; // initial size of the linear memory (1 page = 64kB)
-    //exe.max_memory = wasm_initial_memory; // maximum size of the linear memory
 
-    // https://github.com/ziglang/zig/issues/8633
-    // lib.global_base = 6560;
-    // lib.rdynamic = true;
-    // lib.import_memory = true; // import linear memory from the environment
-    // lib.initial_memory = wasm_initial_memory; // initial size of the linear memory (1 page = 64kB)
-    // lib.max_memory = wasm_initial_memory; // maximum size of the linear memory
-    const exe_options = b.addOptions();
-    exe_options.addOption(usize, "memory_size", wasm_max_memory);
-    exe.root_module.addOptions("build_options", exe_options);
     b.installArtifact(exe);
 }

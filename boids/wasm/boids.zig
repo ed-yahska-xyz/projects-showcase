@@ -99,8 +99,7 @@ const Boid = struct {
     }
 };
 
-var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-const allocator = gpa.allocator();
+const allocator = std.heap.wasm_allocator;
 
 export fn add(a: i32, b: i32) i32 {
     return a + b;
