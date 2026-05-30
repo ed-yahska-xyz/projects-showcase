@@ -11,9 +11,11 @@ pub fn build(b: *std.Build) !void {
 
     const exe = b.addExecutable(.{
         .name = "GameOfLife",
-        .root_source_file = b.path("main.zig"),
-        .target = target,
-        .optimize = .ReleaseSmall,
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("main.zig"),
+            .target = target,
+            .optimize = .ReleaseSmall,
+        }),
     });
 
     exe.entry = .disabled;
