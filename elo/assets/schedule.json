@@ -1,0 +1,1845 @@
+{
+  "meta": {
+    "tournament": "FIFA World Cup 2026",
+    "dates": "2026-06-11 to 2026-07-19",
+    "hosts": [
+      "United States",
+      "Canada",
+      "Mexico"
+    ],
+    "teams": 48,
+    "venues": 16,
+    "total_matches": 104,
+    "opening": "2026-06-11, Estadio Azteca, Mexico City (Mexico)",
+    "final": "2026-07-19, MetLife Stadium (New York New Jersey Stadium), East Rutherford",
+    "round_windows": {
+      "Group": "Jun 11-27",
+      "Round of 32": "Jun 28 - Jul 3",
+      "Round of 16": "Jul 4-7 (incl. Mexico City Jul 5, Vancouver Jul 7)",
+      "Quarterfinal": "Jul 9-11 (all USA)",
+      "Semifinal": "Jul 14 (Dallas), Jul 15 (Atlanta)",
+      "Third-place playoff": "Jul 18 (Miami)",
+      "Final": "Jul 19 (New York/New Jersey)"
+    },
+    "notes": [
+      "Group fixtures (dates/teams/cities) are the official schedule from the fixture data; venue names use FIFA tournament names with common names alongside.",
+      "Knockout teams are TBD and per-match knockout venue/date assignments + the bracket feed come from FIFA's official Annex C fixture list; only round-level dates and confirmed venue anchors are filled here.",
+      "Group LETTERS are the OFFICIAL 2026 draw letters.",
+      "capacity_approx values are approximate."
+    ],
+    "knockout_venue_reference": {
+      "source": "Authoritative: MLSSoccer.com per-stadium official fixture list, cross-validated against Wikipedia match definitions and bracket feeds. All 32 knockout matches confirmed.",
+      "notes": [
+        "Estadio Akron (Guadalajara) hosts NO knockout match — the only host venue without one.",
+        "Mexican knockout games: Estadio BBVA (M75), Estadio Azteca (M79 R32 + M92 R16).",
+        "Canada knockout: BMO Toronto (M83), BC Place Vancouver (M85 R32 + M96 R16, last non-US knockout, Jul 7)."
+      ],
+      "rounds": {
+        "Round of 32": "2026-06-28 to 2026-07-03 (USA/Mexico/Canada; Dallas hosts M78+M88)",
+        "Round of 16": "2026-07-04 to 2026-07-07",
+        "Quarterfinal": "2026-07-09 to 2026-07-11 (USA)",
+        "Semifinal": "Dallas Jul 14 (M101), Atlanta Jul 15 (M102)",
+        "Third-place playoff": "Miami Jul 18 (M103)",
+        "Final": "New York/New Jersey Jul 19 (M104)"
+      }
+    },
+    "r32_slot_definitions": {
+      "73": {
+        "home": "RU_A",
+        "away": "RU_B"
+      },
+      "74": {
+        "home": "W_E",
+        "away": "3rd:A/B/C/D/F"
+      },
+      "75": {
+        "home": "W_F",
+        "away": "RU_C"
+      },
+      "76": {
+        "home": "W_C",
+        "away": "RU_F"
+      },
+      "77": {
+        "home": "W_I",
+        "away": "3rd:C/D/F/G/H"
+      },
+      "78": {
+        "home": "RU_E",
+        "away": "RU_I"
+      },
+      "79": {
+        "home": "W_A",
+        "away": "3rd:C/E/F/H/I"
+      },
+      "80": {
+        "home": "W_L",
+        "away": "3rd:E/H/I/J/K"
+      },
+      "81": {
+        "home": "W_D",
+        "away": "3rd:B/E/F/I/J"
+      },
+      "82": {
+        "home": "W_G",
+        "away": "3rd:A/E/H/I/J"
+      },
+      "83": {
+        "home": "RU_K",
+        "away": "RU_L"
+      },
+      "84": {
+        "home": "W_H",
+        "away": "RU_J"
+      },
+      "85": {
+        "home": "W_B",
+        "away": "3rd:E/F/G/I/J"
+      },
+      "86": {
+        "home": "W_J",
+        "away": "RU_H"
+      },
+      "87": {
+        "home": "W_K",
+        "away": "3rd:D/E/I/J/L"
+      },
+      "88": {
+        "home": "RU_D",
+        "away": "RU_G"
+      }
+    },
+    "knockout_bracket_feeds": {
+      "89": [
+        "W74",
+        "W77"
+      ],
+      "90": [
+        "W73",
+        "W75"
+      ],
+      "91": [
+        "W76",
+        "W78"
+      ],
+      "92": [
+        "W79",
+        "W80"
+      ],
+      "93": [
+        "W83",
+        "W84"
+      ],
+      "94": [
+        "W81",
+        "W82"
+      ],
+      "95": [
+        "W86",
+        "W88"
+      ],
+      "96": [
+        "W85",
+        "W87"
+      ],
+      "97": [
+        "W89",
+        "W90"
+      ],
+      "98": [
+        "W93",
+        "W94"
+      ],
+      "99": [
+        "W91",
+        "W92"
+      ],
+      "100": [
+        "W95",
+        "W96"
+      ],
+      "101": [
+        "W97",
+        "W98"
+      ],
+      "102": [
+        "W99",
+        "W100"
+      ],
+      "103": [
+        "L101",
+        "L102"
+      ],
+      "104": [
+        "W101",
+        "W102"
+      ]
+    }
+  },
+  "matches": [
+    {
+      "match": 1,
+      "stage": "Group",
+      "group": "A",
+      "date": "2026-06-11",
+      "home": "Mexico",
+      "away": "South Africa",
+      "venue": {
+        "stadium": "Estadio Azteca",
+        "fifa_name": "Mexico City Stadium",
+        "city": "Mexico City",
+        "country": "Mexico",
+        "capacity_approx": 83000
+      },
+      "result": null
+    },
+    {
+      "match": 2,
+      "stage": "Group",
+      "group": "A",
+      "date": "2026-06-11",
+      "home": "South Korea",
+      "away": "Czech Republic",
+      "venue": {
+        "stadium": "Estadio Akron",
+        "fifa_name": "Guadalajara Stadium",
+        "city": "Guadalajara",
+        "country": "Mexico",
+        "capacity_approx": 48000
+      },
+      "result": null
+    },
+    {
+      "match": 3,
+      "stage": "Group",
+      "group": "D",
+      "date": "2026-06-12",
+      "home": "United States",
+      "away": "Paraguay",
+      "venue": {
+        "stadium": "SoFi Stadium",
+        "fifa_name": "Los Angeles Stadium",
+        "city": "Los Angeles",
+        "country": "United States",
+        "capacity_approx": 70000
+      },
+      "result": null
+    },
+    {
+      "match": 4,
+      "stage": "Group",
+      "group": "B",
+      "date": "2026-06-12",
+      "home": "Canada",
+      "away": "Bosnia and Herzegovina",
+      "venue": {
+        "stadium": "BMO Field",
+        "fifa_name": "Toronto Stadium",
+        "city": "Toronto",
+        "country": "Canada",
+        "capacity_approx": 45000
+      },
+      "result": null
+    },
+    {
+      "match": 5,
+      "stage": "Group",
+      "group": "C",
+      "date": "2026-06-13",
+      "home": "Brazil",
+      "away": "Morocco",
+      "venue": {
+        "stadium": "MetLife Stadium",
+        "fifa_name": "New York New Jersey Stadium",
+        "city": "New York/New Jersey",
+        "country": "United States",
+        "capacity_approx": 82500
+      },
+      "result": null
+    },
+    {
+      "match": 6,
+      "stage": "Group",
+      "group": "C",
+      "date": "2026-06-13",
+      "home": "Haiti",
+      "away": "Scotland",
+      "venue": {
+        "stadium": "Gillette Stadium",
+        "fifa_name": "Boston Stadium",
+        "city": "Boston",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "result": null
+    },
+    {
+      "match": 7,
+      "stage": "Group",
+      "group": "B",
+      "date": "2026-06-13",
+      "home": "Qatar",
+      "away": "Switzerland",
+      "venue": {
+        "stadium": "Levi's Stadium",
+        "fifa_name": "San Francisco Bay Area Stadium",
+        "city": "San Francisco Bay Area",
+        "country": "United States",
+        "capacity_approx": 68500
+      },
+      "result": null
+    },
+    {
+      "match": 8,
+      "stage": "Group",
+      "group": "D",
+      "date": "2026-06-13",
+      "home": "Australia",
+      "away": "Turkey",
+      "venue": {
+        "stadium": "BC Place",
+        "fifa_name": "Vancouver Stadium",
+        "city": "Vancouver",
+        "country": "Canada",
+        "capacity_approx": 54000
+      },
+      "result": null
+    },
+    {
+      "match": 9,
+      "stage": "Group",
+      "group": "F",
+      "date": "2026-06-14",
+      "home": "Netherlands",
+      "away": "Japan",
+      "venue": {
+        "stadium": "AT&T Stadium",
+        "fifa_name": "Dallas Stadium",
+        "city": "Dallas",
+        "country": "United States",
+        "capacity_approx": 94000
+      },
+      "result": null
+    },
+    {
+      "match": 10,
+      "stage": "Group",
+      "group": "F",
+      "date": "2026-06-14",
+      "home": "Sweden",
+      "away": "Tunisia",
+      "venue": {
+        "stadium": "Estadio BBVA",
+        "fifa_name": "Monterrey Stadium",
+        "city": "Monterrey",
+        "country": "Mexico",
+        "capacity_approx": 53500
+      },
+      "result": null
+    },
+    {
+      "match": 11,
+      "stage": "Group",
+      "group": "E",
+      "date": "2026-06-14",
+      "home": "Germany",
+      "away": "Curaçao",
+      "venue": {
+        "stadium": "NRG Stadium",
+        "fifa_name": "Houston Stadium",
+        "city": "Houston",
+        "country": "United States",
+        "capacity_approx": 72000
+      },
+      "result": null
+    },
+    {
+      "match": 12,
+      "stage": "Group",
+      "group": "E",
+      "date": "2026-06-14",
+      "home": "Ivory Coast",
+      "away": "Ecuador",
+      "venue": {
+        "stadium": "Lincoln Financial Field",
+        "fifa_name": "Philadelphia Stadium",
+        "city": "Philadelphia",
+        "country": "United States",
+        "capacity_approx": 69000
+      },
+      "result": null
+    },
+    {
+      "match": 13,
+      "stage": "Group",
+      "group": "H",
+      "date": "2026-06-15",
+      "home": "Spain",
+      "away": "Cape Verde",
+      "venue": {
+        "stadium": "Mercedes-Benz Stadium",
+        "fifa_name": "Atlanta Stadium",
+        "city": "Atlanta",
+        "country": "United States",
+        "capacity_approx": 71000
+      },
+      "result": null
+    },
+    {
+      "match": 14,
+      "stage": "Group",
+      "group": "G",
+      "date": "2026-06-15",
+      "home": "Iran",
+      "away": "New Zealand",
+      "venue": {
+        "stadium": "SoFi Stadium",
+        "fifa_name": "Los Angeles Stadium",
+        "city": "Los Angeles",
+        "country": "United States",
+        "capacity_approx": 70000
+      },
+      "result": null
+    },
+    {
+      "match": 15,
+      "stage": "Group",
+      "group": "H",
+      "date": "2026-06-15",
+      "home": "Saudi Arabia",
+      "away": "Uruguay",
+      "venue": {
+        "stadium": "Hard Rock Stadium",
+        "fifa_name": "Miami Stadium",
+        "city": "Miami",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "result": null
+    },
+    {
+      "match": 16,
+      "stage": "Group",
+      "group": "G",
+      "date": "2026-06-15",
+      "home": "Belgium",
+      "away": "Egypt",
+      "venue": {
+        "stadium": "Lumen Field",
+        "fifa_name": "Seattle Stadium",
+        "city": "Seattle",
+        "country": "United States",
+        "capacity_approx": 69000
+      },
+      "result": null
+    },
+    {
+      "match": 17,
+      "stage": "Group",
+      "group": "I",
+      "date": "2026-06-16",
+      "home": "France",
+      "away": "Senegal",
+      "venue": {
+        "stadium": "MetLife Stadium",
+        "fifa_name": "New York New Jersey Stadium",
+        "city": "New York/New Jersey",
+        "country": "United States",
+        "capacity_approx": 82500
+      },
+      "result": null
+    },
+    {
+      "match": 18,
+      "stage": "Group",
+      "group": "I",
+      "date": "2026-06-16",
+      "home": "Iraq",
+      "away": "Norway",
+      "venue": {
+        "stadium": "Gillette Stadium",
+        "fifa_name": "Boston Stadium",
+        "city": "Boston",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "result": null
+    },
+    {
+      "match": 19,
+      "stage": "Group",
+      "group": "J",
+      "date": "2026-06-16",
+      "home": "Argentina",
+      "away": "Algeria",
+      "venue": {
+        "stadium": "Arrowhead Stadium",
+        "fifa_name": "Kansas City Stadium",
+        "city": "Kansas City",
+        "country": "United States",
+        "capacity_approx": 73000
+      },
+      "result": null
+    },
+    {
+      "match": 20,
+      "stage": "Group",
+      "group": "J",
+      "date": "2026-06-16",
+      "home": "Austria",
+      "away": "Jordan",
+      "venue": {
+        "stadium": "Levi's Stadium",
+        "fifa_name": "San Francisco Bay Area Stadium",
+        "city": "San Francisco Bay Area",
+        "country": "United States",
+        "capacity_approx": 68500
+      },
+      "result": null
+    },
+    {
+      "match": 21,
+      "stage": "Group",
+      "group": "L",
+      "date": "2026-06-17",
+      "home": "England",
+      "away": "Croatia",
+      "venue": {
+        "stadium": "AT&T Stadium",
+        "fifa_name": "Dallas Stadium",
+        "city": "Dallas",
+        "country": "United States",
+        "capacity_approx": 94000
+      },
+      "result": null
+    },
+    {
+      "match": 22,
+      "stage": "Group",
+      "group": "K",
+      "date": "2026-06-17",
+      "home": "Portugal",
+      "away": "DR Congo",
+      "venue": {
+        "stadium": "NRG Stadium",
+        "fifa_name": "Houston Stadium",
+        "city": "Houston",
+        "country": "United States",
+        "capacity_approx": 72000
+      },
+      "result": null
+    },
+    {
+      "match": 23,
+      "stage": "Group",
+      "group": "K",
+      "date": "2026-06-17",
+      "home": "Uzbekistan",
+      "away": "Colombia",
+      "venue": {
+        "stadium": "Estadio Azteca",
+        "fifa_name": "Mexico City Stadium",
+        "city": "Mexico City",
+        "country": "Mexico",
+        "capacity_approx": 83000
+      },
+      "result": null
+    },
+    {
+      "match": 24,
+      "stage": "Group",
+      "group": "L",
+      "date": "2026-06-17",
+      "home": "Ghana",
+      "away": "Panama",
+      "venue": {
+        "stadium": "BMO Field",
+        "fifa_name": "Toronto Stadium",
+        "city": "Toronto",
+        "country": "Canada",
+        "capacity_approx": 45000
+      },
+      "result": null
+    },
+    {
+      "match": 25,
+      "stage": "Group",
+      "group": "A",
+      "date": "2026-06-18",
+      "home": "Czech Republic",
+      "away": "South Africa",
+      "venue": {
+        "stadium": "Mercedes-Benz Stadium",
+        "fifa_name": "Atlanta Stadium",
+        "city": "Atlanta",
+        "country": "United States",
+        "capacity_approx": 71000
+      },
+      "result": null
+    },
+    {
+      "match": 26,
+      "stage": "Group",
+      "group": "B",
+      "date": "2026-06-18",
+      "home": "Switzerland",
+      "away": "Bosnia and Herzegovina",
+      "venue": {
+        "stadium": "SoFi Stadium",
+        "fifa_name": "Los Angeles Stadium",
+        "city": "Los Angeles",
+        "country": "United States",
+        "capacity_approx": 70000
+      },
+      "result": null
+    },
+    {
+      "match": 27,
+      "stage": "Group",
+      "group": "B",
+      "date": "2026-06-18",
+      "home": "Canada",
+      "away": "Qatar",
+      "venue": {
+        "stadium": "BC Place",
+        "fifa_name": "Vancouver Stadium",
+        "city": "Vancouver",
+        "country": "Canada",
+        "capacity_approx": 54000
+      },
+      "result": null
+    },
+    {
+      "match": 28,
+      "stage": "Group",
+      "group": "A",
+      "date": "2026-06-18",
+      "home": "Mexico",
+      "away": "South Korea",
+      "venue": {
+        "stadium": "Estadio Akron",
+        "fifa_name": "Guadalajara Stadium",
+        "city": "Guadalajara",
+        "country": "Mexico",
+        "capacity_approx": 48000
+      },
+      "result": null
+    },
+    {
+      "match": 29,
+      "stage": "Group",
+      "group": "C",
+      "date": "2026-06-19",
+      "home": "Scotland",
+      "away": "Morocco",
+      "venue": {
+        "stadium": "Gillette Stadium",
+        "fifa_name": "Boston Stadium",
+        "city": "Boston",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "result": null
+    },
+    {
+      "match": 30,
+      "stage": "Group",
+      "group": "C",
+      "date": "2026-06-19",
+      "home": "Brazil",
+      "away": "Haiti",
+      "venue": {
+        "stadium": "Lincoln Financial Field",
+        "fifa_name": "Philadelphia Stadium",
+        "city": "Philadelphia",
+        "country": "United States",
+        "capacity_approx": 69000
+      },
+      "result": null
+    },
+    {
+      "match": 31,
+      "stage": "Group",
+      "group": "D",
+      "date": "2026-06-19",
+      "home": "Turkey",
+      "away": "Paraguay",
+      "venue": {
+        "stadium": "Levi's Stadium",
+        "fifa_name": "San Francisco Bay Area Stadium",
+        "city": "San Francisco Bay Area",
+        "country": "United States",
+        "capacity_approx": 68500
+      },
+      "result": null
+    },
+    {
+      "match": 32,
+      "stage": "Group",
+      "group": "D",
+      "date": "2026-06-19",
+      "home": "United States",
+      "away": "Australia",
+      "venue": {
+        "stadium": "Lumen Field",
+        "fifa_name": "Seattle Stadium",
+        "city": "Seattle",
+        "country": "United States",
+        "capacity_approx": 69000
+      },
+      "result": null
+    },
+    {
+      "match": 33,
+      "stage": "Group",
+      "group": "F",
+      "date": "2026-06-20",
+      "home": "Tunisia",
+      "away": "Japan",
+      "venue": {
+        "stadium": "Estadio BBVA",
+        "fifa_name": "Monterrey Stadium",
+        "city": "Monterrey",
+        "country": "Mexico",
+        "capacity_approx": 53500
+      },
+      "result": null
+    },
+    {
+      "match": 34,
+      "stage": "Group",
+      "group": "F",
+      "date": "2026-06-20",
+      "home": "Netherlands",
+      "away": "Sweden",
+      "venue": {
+        "stadium": "NRG Stadium",
+        "fifa_name": "Houston Stadium",
+        "city": "Houston",
+        "country": "United States",
+        "capacity_approx": 72000
+      },
+      "result": null
+    },
+    {
+      "match": 35,
+      "stage": "Group",
+      "group": "E",
+      "date": "2026-06-20",
+      "home": "Ecuador",
+      "away": "Curaçao",
+      "venue": {
+        "stadium": "Arrowhead Stadium",
+        "fifa_name": "Kansas City Stadium",
+        "city": "Kansas City",
+        "country": "United States",
+        "capacity_approx": 73000
+      },
+      "result": null
+    },
+    {
+      "match": 36,
+      "stage": "Group",
+      "group": "E",
+      "date": "2026-06-20",
+      "home": "Germany",
+      "away": "Ivory Coast",
+      "venue": {
+        "stadium": "BMO Field",
+        "fifa_name": "Toronto Stadium",
+        "city": "Toronto",
+        "country": "Canada",
+        "capacity_approx": 45000
+      },
+      "result": null
+    },
+    {
+      "match": 37,
+      "stage": "Group",
+      "group": "H",
+      "date": "2026-06-21",
+      "home": "Spain",
+      "away": "Saudi Arabia",
+      "venue": {
+        "stadium": "Mercedes-Benz Stadium",
+        "fifa_name": "Atlanta Stadium",
+        "city": "Atlanta",
+        "country": "United States",
+        "capacity_approx": 71000
+      },
+      "result": null
+    },
+    {
+      "match": 38,
+      "stage": "Group",
+      "group": "G",
+      "date": "2026-06-21",
+      "home": "Belgium",
+      "away": "Iran",
+      "venue": {
+        "stadium": "SoFi Stadium",
+        "fifa_name": "Los Angeles Stadium",
+        "city": "Los Angeles",
+        "country": "United States",
+        "capacity_approx": 70000
+      },
+      "result": null
+    },
+    {
+      "match": 39,
+      "stage": "Group",
+      "group": "H",
+      "date": "2026-06-21",
+      "home": "Uruguay",
+      "away": "Cape Verde",
+      "venue": {
+        "stadium": "Hard Rock Stadium",
+        "fifa_name": "Miami Stadium",
+        "city": "Miami",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "result": null
+    },
+    {
+      "match": 40,
+      "stage": "Group",
+      "group": "G",
+      "date": "2026-06-21",
+      "home": "New Zealand",
+      "away": "Egypt",
+      "venue": {
+        "stadium": "BC Place",
+        "fifa_name": "Vancouver Stadium",
+        "city": "Vancouver",
+        "country": "Canada",
+        "capacity_approx": 54000
+      },
+      "result": null
+    },
+    {
+      "match": 41,
+      "stage": "Group",
+      "group": "J",
+      "date": "2026-06-22",
+      "home": "Argentina",
+      "away": "Austria",
+      "venue": {
+        "stadium": "AT&T Stadium",
+        "fifa_name": "Dallas Stadium",
+        "city": "Dallas",
+        "country": "United States",
+        "capacity_approx": 94000
+      },
+      "result": null
+    },
+    {
+      "match": 42,
+      "stage": "Group",
+      "group": "I",
+      "date": "2026-06-22",
+      "home": "Norway",
+      "away": "Senegal",
+      "venue": {
+        "stadium": "MetLife Stadium",
+        "fifa_name": "New York New Jersey Stadium",
+        "city": "New York/New Jersey",
+        "country": "United States",
+        "capacity_approx": 82500
+      },
+      "result": null
+    },
+    {
+      "match": 43,
+      "stage": "Group",
+      "group": "I",
+      "date": "2026-06-22",
+      "home": "France",
+      "away": "Iraq",
+      "venue": {
+        "stadium": "Lincoln Financial Field",
+        "fifa_name": "Philadelphia Stadium",
+        "city": "Philadelphia",
+        "country": "United States",
+        "capacity_approx": 69000
+      },
+      "result": null
+    },
+    {
+      "match": 44,
+      "stage": "Group",
+      "group": "J",
+      "date": "2026-06-22",
+      "home": "Jordan",
+      "away": "Algeria",
+      "venue": {
+        "stadium": "Levi's Stadium",
+        "fifa_name": "San Francisco Bay Area Stadium",
+        "city": "San Francisco Bay Area",
+        "country": "United States",
+        "capacity_approx": 68500
+      },
+      "result": null
+    },
+    {
+      "match": 45,
+      "stage": "Group",
+      "group": "L",
+      "date": "2026-06-23",
+      "home": "England",
+      "away": "Ghana",
+      "venue": {
+        "stadium": "Gillette Stadium",
+        "fifa_name": "Boston Stadium",
+        "city": "Boston",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "result": null
+    },
+    {
+      "match": 46,
+      "stage": "Group",
+      "group": "K",
+      "date": "2026-06-23",
+      "home": "Portugal",
+      "away": "Uzbekistan",
+      "venue": {
+        "stadium": "NRG Stadium",
+        "fifa_name": "Houston Stadium",
+        "city": "Houston",
+        "country": "United States",
+        "capacity_approx": 72000
+      },
+      "result": null
+    },
+    {
+      "match": 47,
+      "stage": "Group",
+      "group": "L",
+      "date": "2026-06-23",
+      "home": "Panama",
+      "away": "Croatia",
+      "venue": {
+        "stadium": "BMO Field",
+        "fifa_name": "Toronto Stadium",
+        "city": "Toronto",
+        "country": "Canada",
+        "capacity_approx": 45000
+      },
+      "result": null
+    },
+    {
+      "match": 48,
+      "stage": "Group",
+      "group": "K",
+      "date": "2026-06-23",
+      "home": "Colombia",
+      "away": "DR Congo",
+      "venue": {
+        "stadium": "Estadio Akron",
+        "fifa_name": "Guadalajara Stadium",
+        "city": "Guadalajara",
+        "country": "Mexico",
+        "capacity_approx": 48000
+      },
+      "result": null
+    },
+    {
+      "match": 49,
+      "stage": "Group",
+      "group": "C",
+      "date": "2026-06-24",
+      "home": "Morocco",
+      "away": "Haiti",
+      "venue": {
+        "stadium": "Mercedes-Benz Stadium",
+        "fifa_name": "Atlanta Stadium",
+        "city": "Atlanta",
+        "country": "United States",
+        "capacity_approx": 71000
+      },
+      "result": null
+    },
+    {
+      "match": 50,
+      "stage": "Group",
+      "group": "A",
+      "date": "2026-06-24",
+      "home": "South Africa",
+      "away": "South Korea",
+      "venue": {
+        "stadium": "Estadio BBVA",
+        "fifa_name": "Monterrey Stadium",
+        "city": "Monterrey",
+        "country": "Mexico",
+        "capacity_approx": 53500
+      },
+      "result": null
+    },
+    {
+      "match": 51,
+      "stage": "Group",
+      "group": "A",
+      "date": "2026-06-24",
+      "home": "Mexico",
+      "away": "Czech Republic",
+      "venue": {
+        "stadium": "Estadio Azteca",
+        "fifa_name": "Mexico City Stadium",
+        "city": "Mexico City",
+        "country": "Mexico",
+        "capacity_approx": 83000
+      },
+      "result": null
+    },
+    {
+      "match": 52,
+      "stage": "Group",
+      "group": "C",
+      "date": "2026-06-24",
+      "home": "Scotland",
+      "away": "Brazil",
+      "venue": {
+        "stadium": "Hard Rock Stadium",
+        "fifa_name": "Miami Stadium",
+        "city": "Miami",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "result": null
+    },
+    {
+      "match": 53,
+      "stage": "Group",
+      "group": "B",
+      "date": "2026-06-24",
+      "home": "Bosnia and Herzegovina",
+      "away": "Qatar",
+      "venue": {
+        "stadium": "Lumen Field",
+        "fifa_name": "Seattle Stadium",
+        "city": "Seattle",
+        "country": "United States",
+        "capacity_approx": 69000
+      },
+      "result": null
+    },
+    {
+      "match": 54,
+      "stage": "Group",
+      "group": "B",
+      "date": "2026-06-24",
+      "home": "Canada",
+      "away": "Switzerland",
+      "venue": {
+        "stadium": "BC Place",
+        "fifa_name": "Vancouver Stadium",
+        "city": "Vancouver",
+        "country": "Canada",
+        "capacity_approx": 54000
+      },
+      "result": null
+    },
+    {
+      "match": 55,
+      "stage": "Group",
+      "group": "F",
+      "date": "2026-06-25",
+      "home": "Japan",
+      "away": "Sweden",
+      "venue": {
+        "stadium": "AT&T Stadium",
+        "fifa_name": "Dallas Stadium",
+        "city": "Dallas",
+        "country": "United States",
+        "capacity_approx": 94000
+      },
+      "result": null
+    },
+    {
+      "match": 56,
+      "stage": "Group",
+      "group": "E",
+      "date": "2026-06-25",
+      "home": "Ecuador",
+      "away": "Germany",
+      "venue": {
+        "stadium": "MetLife Stadium",
+        "fifa_name": "New York New Jersey Stadium",
+        "city": "New York/New Jersey",
+        "country": "United States",
+        "capacity_approx": 82500
+      },
+      "result": null
+    },
+    {
+      "match": 57,
+      "stage": "Group",
+      "group": "D",
+      "date": "2026-06-25",
+      "home": "United States",
+      "away": "Turkey",
+      "venue": {
+        "stadium": "SoFi Stadium",
+        "fifa_name": "Los Angeles Stadium",
+        "city": "Los Angeles",
+        "country": "United States",
+        "capacity_approx": 70000
+      },
+      "result": null
+    },
+    {
+      "match": 58,
+      "stage": "Group",
+      "group": "F",
+      "date": "2026-06-25",
+      "home": "Tunisia",
+      "away": "Netherlands",
+      "venue": {
+        "stadium": "Arrowhead Stadium",
+        "fifa_name": "Kansas City Stadium",
+        "city": "Kansas City",
+        "country": "United States",
+        "capacity_approx": 73000
+      },
+      "result": null
+    },
+    {
+      "match": 59,
+      "stage": "Group",
+      "group": "E",
+      "date": "2026-06-25",
+      "home": "Curaçao",
+      "away": "Ivory Coast",
+      "venue": {
+        "stadium": "Lincoln Financial Field",
+        "fifa_name": "Philadelphia Stadium",
+        "city": "Philadelphia",
+        "country": "United States",
+        "capacity_approx": 69000
+      },
+      "result": null
+    },
+    {
+      "match": 60,
+      "stage": "Group",
+      "group": "D",
+      "date": "2026-06-25",
+      "home": "Paraguay",
+      "away": "Australia",
+      "venue": {
+        "stadium": "Levi's Stadium",
+        "fifa_name": "San Francisco Bay Area Stadium",
+        "city": "San Francisco Bay Area",
+        "country": "United States",
+        "capacity_approx": 68500
+      },
+      "result": null
+    },
+    {
+      "match": 61,
+      "stage": "Group",
+      "group": "I",
+      "date": "2026-06-26",
+      "home": "Norway",
+      "away": "France",
+      "venue": {
+        "stadium": "Gillette Stadium",
+        "fifa_name": "Boston Stadium",
+        "city": "Boston",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "result": null
+    },
+    {
+      "match": 62,
+      "stage": "Group",
+      "group": "H",
+      "date": "2026-06-26",
+      "home": "Cape Verde",
+      "away": "Saudi Arabia",
+      "venue": {
+        "stadium": "NRG Stadium",
+        "fifa_name": "Houston Stadium",
+        "city": "Houston",
+        "country": "United States",
+        "capacity_approx": 72000
+      },
+      "result": null
+    },
+    {
+      "match": 63,
+      "stage": "Group",
+      "group": "G",
+      "date": "2026-06-26",
+      "home": "Egypt",
+      "away": "Iran",
+      "venue": {
+        "stadium": "Lumen Field",
+        "fifa_name": "Seattle Stadium",
+        "city": "Seattle",
+        "country": "United States",
+        "capacity_approx": 69000
+      },
+      "result": null
+    },
+    {
+      "match": 64,
+      "stage": "Group",
+      "group": "I",
+      "date": "2026-06-26",
+      "home": "Senegal",
+      "away": "Iraq",
+      "venue": {
+        "stadium": "BMO Field",
+        "fifa_name": "Toronto Stadium",
+        "city": "Toronto",
+        "country": "Canada",
+        "capacity_approx": 45000
+      },
+      "result": null
+    },
+    {
+      "match": 65,
+      "stage": "Group",
+      "group": "G",
+      "date": "2026-06-26",
+      "home": "New Zealand",
+      "away": "Belgium",
+      "venue": {
+        "stadium": "BC Place",
+        "fifa_name": "Vancouver Stadium",
+        "city": "Vancouver",
+        "country": "Canada",
+        "capacity_approx": 54000
+      },
+      "result": null
+    },
+    {
+      "match": 66,
+      "stage": "Group",
+      "group": "H",
+      "date": "2026-06-26",
+      "home": "Uruguay",
+      "away": "Spain",
+      "venue": {
+        "stadium": "Estadio Akron",
+        "fifa_name": "Guadalajara Stadium",
+        "city": "Guadalajara",
+        "country": "Mexico",
+        "capacity_approx": 48000
+      },
+      "result": null
+    },
+    {
+      "match": 67,
+      "stage": "Group",
+      "group": "J",
+      "date": "2026-06-27",
+      "home": "Jordan",
+      "away": "Argentina",
+      "venue": {
+        "stadium": "AT&T Stadium",
+        "fifa_name": "Dallas Stadium",
+        "city": "Dallas",
+        "country": "United States",
+        "capacity_approx": 94000
+      },
+      "result": null
+    },
+    {
+      "match": 68,
+      "stage": "Group",
+      "group": "K",
+      "date": "2026-06-27",
+      "home": "DR Congo",
+      "away": "Uzbekistan",
+      "venue": {
+        "stadium": "Mercedes-Benz Stadium",
+        "fifa_name": "Atlanta Stadium",
+        "city": "Atlanta",
+        "country": "United States",
+        "capacity_approx": 71000
+      },
+      "result": null
+    },
+    {
+      "match": 69,
+      "stage": "Group",
+      "group": "L",
+      "date": "2026-06-27",
+      "home": "Panama",
+      "away": "England",
+      "venue": {
+        "stadium": "MetLife Stadium",
+        "fifa_name": "New York New Jersey Stadium",
+        "city": "New York/New Jersey",
+        "country": "United States",
+        "capacity_approx": 82500
+      },
+      "result": null
+    },
+    {
+      "match": 70,
+      "stage": "Group",
+      "group": "J",
+      "date": "2026-06-27",
+      "home": "Algeria",
+      "away": "Austria",
+      "venue": {
+        "stadium": "Arrowhead Stadium",
+        "fifa_name": "Kansas City Stadium",
+        "city": "Kansas City",
+        "country": "United States",
+        "capacity_approx": 73000
+      },
+      "result": null
+    },
+    {
+      "match": 71,
+      "stage": "Group",
+      "group": "K",
+      "date": "2026-06-27",
+      "home": "Colombia",
+      "away": "Portugal",
+      "venue": {
+        "stadium": "Hard Rock Stadium",
+        "fifa_name": "Miami Stadium",
+        "city": "Miami",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "result": null
+    },
+    {
+      "match": 72,
+      "stage": "Group",
+      "group": "L",
+      "date": "2026-06-27",
+      "home": "Croatia",
+      "away": "Ghana",
+      "venue": {
+        "stadium": "Lincoln Financial Field",
+        "fifa_name": "Philadelphia Stadium",
+        "city": "Philadelphia",
+        "country": "United States",
+        "capacity_approx": 69000
+      },
+      "result": null
+    },
+    {
+      "match": 73,
+      "stage": "Round of 32",
+      "date": "2026-06-28",
+      "home": "RU_A",
+      "away": "RU_B",
+      "venue": {
+        "stadium": "SoFi Stadium",
+        "fifa_name": "Los Angeles Stadium",
+        "city": "Los Angeles",
+        "country": "United States",
+        "capacity_approx": 70000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 74,
+      "stage": "Round of 32",
+      "date": "2026-06-29",
+      "home": "W_E",
+      "away": "3rd:A/B/C/D/F",
+      "venue": {
+        "stadium": "Gillette Stadium",
+        "fifa_name": "Boston Stadium",
+        "city": "Boston",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 75,
+      "stage": "Round of 32",
+      "date": "2026-06-29",
+      "home": "W_F",
+      "away": "RU_C",
+      "venue": {
+        "stadium": "Estadio BBVA",
+        "fifa_name": "Monterrey Stadium",
+        "city": "Monterrey",
+        "country": "Mexico",
+        "capacity_approx": 53500
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 76,
+      "stage": "Round of 32",
+      "date": "2026-06-29",
+      "home": "W_C",
+      "away": "RU_F",
+      "venue": {
+        "stadium": "NRG Stadium",
+        "fifa_name": "Houston Stadium",
+        "city": "Houston",
+        "country": "United States",
+        "capacity_approx": 72000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 77,
+      "stage": "Round of 32",
+      "date": "2026-06-30",
+      "home": "W_I",
+      "away": "3rd:C/D/F/G/H",
+      "venue": {
+        "stadium": "MetLife Stadium",
+        "fifa_name": "New York New Jersey Stadium",
+        "city": "New York/New Jersey",
+        "country": "United States",
+        "capacity_approx": 82500
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 78,
+      "stage": "Round of 32",
+      "date": "2026-06-30",
+      "home": "RU_E",
+      "away": "RU_I",
+      "venue": {
+        "stadium": "AT&T Stadium",
+        "fifa_name": "Dallas Stadium",
+        "city": "Dallas",
+        "country": "United States",
+        "capacity_approx": 94000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 79,
+      "stage": "Round of 32",
+      "date": "2026-06-30",
+      "home": "W_A",
+      "away": "3rd:C/E/F/H/I",
+      "venue": {
+        "stadium": "Estadio Azteca",
+        "fifa_name": "Mexico City Stadium",
+        "city": "Mexico City",
+        "country": "Mexico",
+        "capacity_approx": 83000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 80,
+      "stage": "Round of 32",
+      "date": "2026-07-01",
+      "home": "W_L",
+      "away": "3rd:E/H/I/J/K",
+      "venue": {
+        "stadium": "Mercedes-Benz Stadium",
+        "fifa_name": "Atlanta Stadium",
+        "city": "Atlanta",
+        "country": "United States",
+        "capacity_approx": 71000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 81,
+      "stage": "Round of 32",
+      "date": "2026-07-01",
+      "home": "W_D",
+      "away": "3rd:B/E/F/I/J",
+      "venue": {
+        "stadium": "Levi's Stadium",
+        "fifa_name": "San Francisco Bay Area Stadium",
+        "city": "San Francisco Bay Area",
+        "country": "United States",
+        "capacity_approx": 68500
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 82,
+      "stage": "Round of 32",
+      "date": "2026-07-01",
+      "home": "W_G",
+      "away": "3rd:A/E/H/I/J",
+      "venue": {
+        "stadium": "Lumen Field",
+        "fifa_name": "Seattle Stadium",
+        "city": "Seattle",
+        "country": "United States",
+        "capacity_approx": 69000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 83,
+      "stage": "Round of 32",
+      "date": "2026-07-02",
+      "home": "RU_K",
+      "away": "RU_L",
+      "venue": {
+        "stadium": "BMO Field",
+        "fifa_name": "Toronto Stadium",
+        "city": "Toronto",
+        "country": "Canada",
+        "capacity_approx": 45000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 84,
+      "stage": "Round of 32",
+      "date": "2026-07-02",
+      "home": "W_H",
+      "away": "RU_J",
+      "venue": {
+        "stadium": "SoFi Stadium",
+        "fifa_name": "Los Angeles Stadium",
+        "city": "Los Angeles",
+        "country": "United States",
+        "capacity_approx": 70000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 85,
+      "stage": "Round of 32",
+      "date": "2026-07-02",
+      "home": "W_B",
+      "away": "3rd:E/F/G/I/J",
+      "venue": {
+        "stadium": "BC Place",
+        "fifa_name": "Vancouver Stadium",
+        "city": "Vancouver",
+        "country": "Canada",
+        "capacity_approx": 54500
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 86,
+      "stage": "Round of 32",
+      "date": "2026-07-03",
+      "home": "W_J",
+      "away": "RU_H",
+      "venue": {
+        "stadium": "Hard Rock Stadium",
+        "fifa_name": "Miami Stadium",
+        "city": "Miami",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 87,
+      "stage": "Round of 32",
+      "date": "2026-07-03",
+      "home": "W_K",
+      "away": "3rd:D/E/I/J/L",
+      "venue": {
+        "stadium": "GEHA Field at Arrowhead Stadium",
+        "fifa_name": "Kansas City Stadium",
+        "city": "Kansas City",
+        "country": "United States",
+        "capacity_approx": 73000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 88,
+      "stage": "Round of 32",
+      "date": "2026-07-03",
+      "home": "RU_D",
+      "away": "RU_G",
+      "venue": {
+        "stadium": "AT&T Stadium",
+        "fifa_name": "Dallas Stadium",
+        "city": "Dallas",
+        "country": "United States",
+        "capacity_approx": 94000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 89,
+      "stage": "Round of 16",
+      "date": "2026-07-04",
+      "home": "W74",
+      "away": "W77",
+      "venue": {
+        "stadium": "Lincoln Financial Field",
+        "fifa_name": "Philadelphia Stadium",
+        "city": "Philadelphia",
+        "country": "United States",
+        "capacity_approx": 69000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 90,
+      "stage": "Round of 16",
+      "date": "2026-07-04",
+      "home": "W73",
+      "away": "W75",
+      "venue": {
+        "stadium": "NRG Stadium",
+        "fifa_name": "Houston Stadium",
+        "city": "Houston",
+        "country": "United States",
+        "capacity_approx": 72000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 91,
+      "stage": "Round of 16",
+      "date": "2026-07-05",
+      "home": "W76",
+      "away": "W78",
+      "venue": {
+        "stadium": "MetLife Stadium",
+        "fifa_name": "New York New Jersey Stadium",
+        "city": "New York/New Jersey",
+        "country": "United States",
+        "capacity_approx": 82500
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 92,
+      "stage": "Round of 16",
+      "date": "2026-07-05",
+      "home": "W79",
+      "away": "W80",
+      "venue": {
+        "stadium": "Estadio Azteca",
+        "fifa_name": "Mexico City Stadium",
+        "city": "Mexico City",
+        "country": "Mexico",
+        "capacity_approx": 83000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 93,
+      "stage": "Round of 16",
+      "date": "2026-07-06",
+      "home": "W83",
+      "away": "W84",
+      "venue": {
+        "stadium": "AT&T Stadium",
+        "fifa_name": "Dallas Stadium",
+        "city": "Dallas",
+        "country": "United States",
+        "capacity_approx": 94000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 94,
+      "stage": "Round of 16",
+      "date": "2026-07-06",
+      "home": "W81",
+      "away": "W82",
+      "venue": {
+        "stadium": "Lumen Field",
+        "fifa_name": "Seattle Stadium",
+        "city": "Seattle",
+        "country": "United States",
+        "capacity_approx": 69000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 95,
+      "stage": "Round of 16",
+      "date": "2026-07-07",
+      "home": "W86",
+      "away": "W88",
+      "venue": {
+        "stadium": "Mercedes-Benz Stadium",
+        "fifa_name": "Atlanta Stadium",
+        "city": "Atlanta",
+        "country": "United States",
+        "capacity_approx": 71000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 96,
+      "stage": "Round of 16",
+      "date": "2026-07-07",
+      "home": "W85",
+      "away": "W87",
+      "venue": {
+        "stadium": "BC Place",
+        "fifa_name": "Vancouver Stadium",
+        "city": "Vancouver",
+        "country": "Canada",
+        "capacity_approx": 54500
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 97,
+      "stage": "Quarterfinal",
+      "date": "2026-07-09",
+      "home": "W89",
+      "away": "W90",
+      "venue": {
+        "stadium": "Gillette Stadium",
+        "fifa_name": "Boston Stadium",
+        "city": "Boston",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 98,
+      "stage": "Quarterfinal",
+      "date": "2026-07-10",
+      "home": "W93",
+      "away": "W94",
+      "venue": {
+        "stadium": "SoFi Stadium",
+        "fifa_name": "Los Angeles Stadium",
+        "city": "Los Angeles",
+        "country": "United States",
+        "capacity_approx": 70000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 99,
+      "stage": "Quarterfinal",
+      "date": "2026-07-11",
+      "home": "W91",
+      "away": "W92",
+      "venue": {
+        "stadium": "Hard Rock Stadium",
+        "fifa_name": "Miami Stadium",
+        "city": "Miami",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 100,
+      "stage": "Quarterfinal",
+      "date": "2026-07-11",
+      "home": "W95",
+      "away": "W96",
+      "venue": {
+        "stadium": "GEHA Field at Arrowhead Stadium",
+        "fifa_name": "Kansas City Stadium",
+        "city": "Kansas City",
+        "country": "United States",
+        "capacity_approx": 73000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 101,
+      "stage": "Semifinal",
+      "date": "2026-07-14",
+      "home": "W97",
+      "away": "W98",
+      "venue": {
+        "stadium": "AT&T Stadium",
+        "fifa_name": "Dallas Stadium",
+        "city": "Dallas",
+        "country": "United States",
+        "capacity_approx": 94000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 102,
+      "stage": "Semifinal",
+      "date": "2026-07-15",
+      "home": "W99",
+      "away": "W100",
+      "venue": {
+        "stadium": "Mercedes-Benz Stadium",
+        "fifa_name": "Atlanta Stadium",
+        "city": "Atlanta",
+        "country": "United States",
+        "capacity_approx": 71000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 103,
+      "stage": "Third-place playoff",
+      "date": "2026-07-18",
+      "home": "L101",
+      "away": "L102",
+      "venue": {
+        "stadium": "Hard Rock Stadium",
+        "fifa_name": "Miami Stadium",
+        "city": "Miami",
+        "country": "United States",
+        "capacity_approx": 65000
+      },
+      "venue_confirmed": true,
+      "result": null
+    },
+    {
+      "match": 104,
+      "stage": "Final",
+      "date": "2026-07-19",
+      "home": "W101",
+      "away": "W102",
+      "venue": {
+        "stadium": "MetLife Stadium",
+        "fifa_name": "New York New Jersey Stadium",
+        "city": "New York/New Jersey",
+        "country": "United States",
+        "capacity_approx": 82500
+      },
+      "venue_confirmed": true,
+      "result": null
+    }
+  ]
+}
