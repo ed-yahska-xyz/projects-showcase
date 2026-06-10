@@ -1,0 +1,247 @@
+{
+  "meta": {
+    "note": "48-team field + group membership from fixtures; group LETTERS are by-convenience, reconcile with official draw for R32."
+  },
+  "teams": [
+    {
+      "id": 0,
+      "name": "Algeria",
+      "group": "A"
+    },
+    {
+      "id": 1,
+      "name": "Argentina",
+      "group": "A"
+    },
+    {
+      "id": 2,
+      "name": "Australia",
+      "group": "B"
+    },
+    {
+      "id": 3,
+      "name": "Austria",
+      "group": "A"
+    },
+    {
+      "id": 4,
+      "name": "Belgium",
+      "group": "C"
+    },
+    {
+      "id": 5,
+      "name": "Bosnia and Herzegovina",
+      "group": "D"
+    },
+    {
+      "id": 6,
+      "name": "Brazil",
+      "group": "E"
+    },
+    {
+      "id": 7,
+      "name": "Canada",
+      "group": "D"
+    },
+    {
+      "id": 8,
+      "name": "Cape Verde",
+      "group": "F"
+    },
+    {
+      "id": 9,
+      "name": "Colombia",
+      "group": "G"
+    },
+    {
+      "id": 10,
+      "name": "Croatia",
+      "group": "H"
+    },
+    {
+      "id": 11,
+      "name": "Curaçao",
+      "group": "I"
+    },
+    {
+      "id": 12,
+      "name": "Czech Republic",
+      "group": "J"
+    },
+    {
+      "id": 13,
+      "name": "DR Congo",
+      "group": "G"
+    },
+    {
+      "id": 14,
+      "name": "Ecuador",
+      "group": "I"
+    },
+    {
+      "id": 15,
+      "name": "Egypt",
+      "group": "C"
+    },
+    {
+      "id": 16,
+      "name": "England",
+      "group": "H"
+    },
+    {
+      "id": 17,
+      "name": "France",
+      "group": "K"
+    },
+    {
+      "id": 18,
+      "name": "Germany",
+      "group": "I"
+    },
+    {
+      "id": 19,
+      "name": "Ghana",
+      "group": "H"
+    },
+    {
+      "id": 20,
+      "name": "Haiti",
+      "group": "E"
+    },
+    {
+      "id": 21,
+      "name": "Iran",
+      "group": "C"
+    },
+    {
+      "id": 22,
+      "name": "Iraq",
+      "group": "K"
+    },
+    {
+      "id": 23,
+      "name": "Ivory Coast",
+      "group": "I"
+    },
+    {
+      "id": 24,
+      "name": "Japan",
+      "group": "L"
+    },
+    {
+      "id": 25,
+      "name": "Jordan",
+      "group": "A"
+    },
+    {
+      "id": 26,
+      "name": "Mexico",
+      "group": "J"
+    },
+    {
+      "id": 27,
+      "name": "Morocco",
+      "group": "E"
+    },
+    {
+      "id": 28,
+      "name": "Netherlands",
+      "group": "L"
+    },
+    {
+      "id": 29,
+      "name": "New Zealand",
+      "group": "C"
+    },
+    {
+      "id": 30,
+      "name": "Norway",
+      "group": "K"
+    },
+    {
+      "id": 31,
+      "name": "Panama",
+      "group": "H"
+    },
+    {
+      "id": 32,
+      "name": "Paraguay",
+      "group": "B"
+    },
+    {
+      "id": 33,
+      "name": "Portugal",
+      "group": "G"
+    },
+    {
+      "id": 34,
+      "name": "Qatar",
+      "group": "D"
+    },
+    {
+      "id": 35,
+      "name": "Saudi Arabia",
+      "group": "F"
+    },
+    {
+      "id": 36,
+      "name": "Scotland",
+      "group": "E"
+    },
+    {
+      "id": 37,
+      "name": "Senegal",
+      "group": "K"
+    },
+    {
+      "id": 38,
+      "name": "South Africa",
+      "group": "J"
+    },
+    {
+      "id": 39,
+      "name": "South Korea",
+      "group": "J"
+    },
+    {
+      "id": 40,
+      "name": "Spain",
+      "group": "F"
+    },
+    {
+      "id": 41,
+      "name": "Sweden",
+      "group": "L"
+    },
+    {
+      "id": 42,
+      "name": "Switzerland",
+      "group": "D"
+    },
+    {
+      "id": 43,
+      "name": "Tunisia",
+      "group": "L"
+    },
+    {
+      "id": 44,
+      "name": "Turkey",
+      "group": "B"
+    },
+    {
+      "id": 45,
+      "name": "United States",
+      "group": "B"
+    },
+    {
+      "id": 46,
+      "name": "Uruguay",
+      "group": "F"
+    },
+    {
+      "id": 47,
+      "name": "Uzbekistan",
+      "group": "G"
+    }
+  ]
+}

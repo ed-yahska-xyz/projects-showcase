@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0"
+    />
+    <meta name="theme-color" content="#0b3d2e" />
+    <title>World Cup Predictor — This or That</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="app">
+      <!-- Progress / budget meter -->
+      <header class="topbar">
+        <div class="meter">
+          <div class="meter-track">
+            <div id="meter-fill" class="meter-fill"></div>
+          </div>
+          <div class="meter-row">
+            <span id="meter-label" class="meter-label">Warming up</span>
+            <span id="pick-count" class="pick-count">0 picks</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- The this-or-that stage -->
+      <section id="stage" class="stage" aria-label="Pick the team you think is better">
+        <button id="card-a" class="card" type="button" aria-label="Pick left team"></button>
+        <div class="vs" aria-hidden="true"><span>VS</span></div>
+        <button id="card-b" class="card" type="button" aria-label="Pick right team"></button>
+      </section>
+
+      <!-- Controls -->
+      <footer class="controls">
+        <button id="undo" class="btn ghost" type="button" disabled>Undo</button>
+        <p class="kbd-hint" aria-hidden="true">
+          <kbd>←</kbd>/<kbd>→</kbd> or <kbd>1</kbd>/<kbd>2</kbd> to pick · <kbd>U</kbd> undo
+        </p>
+        <button id="finish-btn" class="btn primary" type="button" disabled>
+          See my bracket
+        </button>
+      </footer>
+
+      <!-- Results overlay (filled by bracket.js) -->
+      <section id="finish-panel" class="finish-panel" aria-live="polite"></section>
+    </main>
+
+    <script type="module" src="ranking.js"></script>
+  </body>
+</html>

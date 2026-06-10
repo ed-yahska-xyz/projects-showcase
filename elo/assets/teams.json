@@ -1,0 +1,247 @@
+{
+  "meta": {
+    "note": "48-team field with the OFFICIAL 2026 group letters (reconciled with the official draw). Names match theta_data.json exactly."
+  },
+  "teams": [
+    {
+      "id": 0,
+      "name": "Algeria",
+      "group": "J"
+    },
+    {
+      "id": 1,
+      "name": "Argentina",
+      "group": "J"
+    },
+    {
+      "id": 2,
+      "name": "Australia",
+      "group": "D"
+    },
+    {
+      "id": 3,
+      "name": "Austria",
+      "group": "J"
+    },
+    {
+      "id": 4,
+      "name": "Belgium",
+      "group": "G"
+    },
+    {
+      "id": 5,
+      "name": "Bosnia and Herzegovina",
+      "group": "B"
+    },
+    {
+      "id": 6,
+      "name": "Brazil",
+      "group": "C"
+    },
+    {
+      "id": 7,
+      "name": "Canada",
+      "group": "B"
+    },
+    {
+      "id": 8,
+      "name": "Cape Verde",
+      "group": "H"
+    },
+    {
+      "id": 9,
+      "name": "Colombia",
+      "group": "K"
+    },
+    {
+      "id": 10,
+      "name": "Croatia",
+      "group": "L"
+    },
+    {
+      "id": 11,
+      "name": "Curaçao",
+      "group": "E"
+    },
+    {
+      "id": 12,
+      "name": "Czech Republic",
+      "group": "A"
+    },
+    {
+      "id": 13,
+      "name": "DR Congo",
+      "group": "K"
+    },
+    {
+      "id": 14,
+      "name": "Ecuador",
+      "group": "E"
+    },
+    {
+      "id": 15,
+      "name": "Egypt",
+      "group": "G"
+    },
+    {
+      "id": 16,
+      "name": "England",
+      "group": "L"
+    },
+    {
+      "id": 17,
+      "name": "France",
+      "group": "I"
+    },
+    {
+      "id": 18,
+      "name": "Germany",
+      "group": "E"
+    },
+    {
+      "id": 19,
+      "name": "Ghana",
+      "group": "L"
+    },
+    {
+      "id": 20,
+      "name": "Haiti",
+      "group": "C"
+    },
+    {
+      "id": 21,
+      "name": "Iran",
+      "group": "G"
+    },
+    {
+      "id": 22,
+      "name": "Iraq",
+      "group": "I"
+    },
+    {
+      "id": 23,
+      "name": "Ivory Coast",
+      "group": "E"
+    },
+    {
+      "id": 24,
+      "name": "Japan",
+      "group": "F"
+    },
+    {
+      "id": 25,
+      "name": "Jordan",
+      "group": "J"
+    },
+    {
+      "id": 26,
+      "name": "Mexico",
+      "group": "A"
+    },
+    {
+      "id": 27,
+      "name": "Morocco",
+      "group": "C"
+    },
+    {
+      "id": 28,
+      "name": "Netherlands",
+      "group": "F"
+    },
+    {
+      "id": 29,
+      "name": "New Zealand",
+      "group": "G"
+    },
+    {
+      "id": 30,
+      "name": "Norway",
+      "group": "I"
+    },
+    {
+      "id": 31,
+      "name": "Panama",
+      "group": "L"
+    },
+    {
+      "id": 32,
+      "name": "Paraguay",
+      "group": "D"
+    },
+    {
+      "id": 33,
+      "name": "Portugal",
+      "group": "K"
+    },
+    {
+      "id": 34,
+      "name": "Qatar",
+      "group": "B"
+    },
+    {
+      "id": 35,
+      "name": "Saudi Arabia",
+      "group": "H"
+    },
+    {
+      "id": 36,
+      "name": "Scotland",
+      "group": "C"
+    },
+    {
+      "id": 37,
+      "name": "Senegal",
+      "group": "I"
+    },
+    {
+      "id": 38,
+      "name": "South Africa",
+      "group": "A"
+    },
+    {
+      "id": 39,
+      "name": "South Korea",
+      "group": "A"
+    },
+    {
+      "id": 40,
+      "name": "Spain",
+      "group": "H"
+    },
+    {
+      "id": 41,
+      "name": "Sweden",
+      "group": "F"
+    },
+    {
+      "id": 42,
+      "name": "Switzerland",
+      "group": "B"
+    },
+    {
+      "id": 43,
+      "name": "Tunisia",
+      "group": "F"
+    },
+    {
+      "id": 44,
+      "name": "Turkey",
+      "group": "D"
+    },
+    {
+      "id": 45,
+      "name": "United States",
+      "group": "D"
+    },
+    {
+      "id": 46,
+      "name": "Uruguay",
+      "group": "H"
+    },
+    {
+      "id": 47,
+      "name": "Uzbekistan",
+      "group": "K"
+    }
+  ]
+}

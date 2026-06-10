@@ -24,3 +24,9 @@ zig-cache/
 
 # Logs
 *.log
+
+# Python venv
+.venv/
+
+# Reference screenshots (not project files)
+Screenshot*.png

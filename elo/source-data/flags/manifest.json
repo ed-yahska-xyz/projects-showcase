@@ -1,0 +1,395 @@
+{
+  "meta": {
+    "teams": 48,
+    "format": "SVG",
+    "source": "flag-icons (github.com/lipis/flag-icons)",
+    "license": "MIT",
+    "note": "ISO 3166-1 alpha-2 codes; England=gb-eng, Scotland=gb-sct (FIFA home nations)."
+  },
+  "flags": [
+    {
+      "id": 0,
+      "name": "Algeria",
+      "group": "A",
+      "code": "dz",
+      "flag_4x3": "4x3/dz.svg",
+      "flag_1x1": "1x1/dz.svg"
+    },
+    {
+      "id": 1,
+      "name": "Argentina",
+      "group": "A",
+      "code": "ar",
+      "flag_4x3": "4x3/ar.svg",
+      "flag_1x1": "1x1/ar.svg"
+    },
+    {
+      "id": 2,
+      "name": "Australia",
+      "group": "B",
+      "code": "au",
+      "flag_4x3": "4x3/au.svg",
+      "flag_1x1": "1x1/au.svg"
+    },
+    {
+      "id": 3,
+      "name": "Austria",
+      "group": "A",
+      "code": "at",
+      "flag_4x3": "4x3/at.svg",
+      "flag_1x1": "1x1/at.svg"
+    },
+    {
+      "id": 4,
+      "name": "Belgium",
+      "group": "C",
+      "code": "be",
+      "flag_4x3": "4x3/be.svg",
+      "flag_1x1": "1x1/be.svg"
+    },
+    {
+      "id": 5,
+      "name": "Bosnia and Herzegovina",
+      "group": "D",
+      "code": "ba",
+      "flag_4x3": "4x3/ba.svg",
+      "flag_1x1": "1x1/ba.svg"
+    },
+    {
+      "id": 6,
+      "name": "Brazil",
+      "group": "E",
+      "code": "br",
+      "flag_4x3": "4x3/br.svg",
+      "flag_1x1": "1x1/br.svg"
+    },
+    {
+      "id": 7,
+      "name": "Canada",
+      "group": "D",
+      "code": "ca",
+      "flag_4x3": "4x3/ca.svg",
+      "flag_1x1": "1x1/ca.svg"
+    },
+    {
+      "id": 8,
+      "name": "Cape Verde",
+      "group": "F",
+      "code": "cv",
+      "flag_4x3": "4x3/cv.svg",
+      "flag_1x1": "1x1/cv.svg"
+    },
+    {
+      "id": 9,
+      "name": "Colombia",
+      "group": "G",
+      "code": "co",
+      "flag_4x3": "4x3/co.svg",
+      "flag_1x1": "1x1/co.svg"
+    },
+    {
+      "id": 10,
+      "name": "Croatia",
+      "group": "H",
+      "code": "hr",
+      "flag_4x3": "4x3/hr.svg",
+      "flag_1x1": "1x1/hr.svg"
+    },
+    {
+      "id": 11,
+      "name": "Curaçao",
+      "group": "I",
+      "code": "cw",
+      "flag_4x3": "4x3/cw.svg",
+      "flag_1x1": "1x1/cw.svg"
+    },
+    {
+      "id": 12,
+      "name": "Czech Republic",
+      "group": "J",
+      "code": "cz",
+      "flag_4x3": "4x3/cz.svg",
+      "flag_1x1": "1x1/cz.svg"
+    },
+    {
+      "id": 13,
+      "name": "DR Congo",
+      "group": "G",
+      "code": "cd",
+      "flag_4x3": "4x3/cd.svg",
+      "flag_1x1": "1x1/cd.svg"
+    },
+    {
+      "id": 14,
+      "name": "Ecuador",
+      "group": "I",
+      "code": "ec",
+      "flag_4x3": "4x3/ec.svg",
+      "flag_1x1": "1x1/ec.svg"
+    },
+    {
+      "id": 15,
+      "name": "Egypt",
+      "group": "C",
+      "code": "eg",
+      "flag_4x3": "4x3/eg.svg",
+      "flag_1x1": "1x1/eg.svg"
+    },
+    {
+      "id": 16,
+      "name": "England",
+      "group": "H",
+      "code": "gb-eng",
+      "flag_4x3": "4x3/gb-eng.svg",
+      "flag_1x1": "1x1/gb-eng.svg"
+    },
+    {
+      "id": 17,
+      "name": "France",
+      "group": "K",
+      "code": "fr",
+      "flag_4x3": "4x3/fr.svg",
+      "flag_1x1": "1x1/fr.svg"
+    },
+    {
+      "id": 18,
+      "name": "Germany",
+      "group": "I",
+      "code": "de",
+      "flag_4x3": "4x3/de.svg",
+      "flag_1x1": "1x1/de.svg"
+    },
+    {
+      "id": 19,
+      "name": "Ghana",
+      "group": "H",
+      "code": "gh",
+      "flag_4x3": "4x3/gh.svg",
+      "flag_1x1": "1x1/gh.svg"
+    },
+    {
+      "id": 20,
+      "name": "Haiti",
+      "group": "E",
+      "code": "ht",
+      "flag_4x3": "4x3/ht.svg",
+      "flag_1x1": "1x1/ht.svg"
+    },
+    {
+      "id": 21,
+      "name": "Iran",
+      "group": "C",
+      "code": "ir",
+      "flag_4x3": "4x3/ir.svg",
+      "flag_1x1": "1x1/ir.svg"
+    },
+    {
+      "id": 22,
+      "name": "Iraq",
+      "group": "K",
+      "code": "iq",
+      "flag_4x3": "4x3/iq.svg",
+      "flag_1x1": "1x1/iq.svg"
+    },
+    {
+      "id": 23,
+      "name": "Ivory Coast",
+      "group": "I",
+      "code": "ci",
+      "flag_4x3": "4x3/ci.svg",
+      "flag_1x1": "1x1/ci.svg"
+    },
+    {
+      "id": 24,
+      "name": "Japan",
+      "group": "L",
+      "code": "jp",
+      "flag_4x3": "4x3/jp.svg",
+      "flag_1x1": "1x1/jp.svg"
+    },
+    {
+      "id": 25,
+      "name": "Jordan",
+      "group": "A",
+      "code": "jo",
+      "flag_4x3": "4x3/jo.svg",
+      "flag_1x1": "1x1/jo.svg"
+    },
+    {
+      "id": 26,
+      "name": "Mexico",
+      "group": "J",
+      "code": "mx",
+      "flag_4x3": "4x3/mx.svg",
+      "flag_1x1": "1x1/mx.svg"
+    },
+    {
+      "id": 27,
+      "name": "Morocco",
+      "group": "E",
+      "code": "ma",
+      "flag_4x3": "4x3/ma.svg",
+      "flag_1x1": "1x1/ma.svg"
+    },
+    {
+      "id": 28,
+      "name": "Netherlands",
+      "group": "L",
+      "code": "nl",
+      "flag_4x3": "4x3/nl.svg",
+      "flag_1x1": "1x1/nl.svg"
+    },
+    {
+      "id": 29,
+      "name": "New Zealand",
+      "group": "C",
+      "code": "nz",
+      "flag_4x3": "4x3/nz.svg",
+      "flag_1x1": "1x1/nz.svg"
+    },
+    {
+      "id": 30,
+      "name": "Norway",
+      "group": "K",
+      "code": "no",
+      "flag_4x3": "4x3/no.svg",
+      "flag_1x1": "1x1/no.svg"
+    },
+    {
+      "id": 31,
+      "name": "Panama",
+      "group": "H",
+      "code": "pa",
+      "flag_4x3": "4x3/pa.svg",
+      "flag_1x1": "1x1/pa.svg"
+    },
+    {
+      "id": 32,
+      "name": "Paraguay",
+      "group": "B",
+      "code": "py",
+      "flag_4x3": "4x3/py.svg",
+      "flag_1x1": "1x1/py.svg"
+    },
+    {
+      "id": 33,
+      "name": "Portugal",
+      "group": "G",
+      "code": "pt",
+      "flag_4x3": "4x3/pt.svg",
+      "flag_1x1": "1x1/pt.svg"
+    },
+    {
+      "id": 34,
+      "name": "Qatar",
+      "group": "D",
+      "code": "qa",
+      "flag_4x3": "4x3/qa.svg",
+      "flag_1x1": "1x1/qa.svg"
+    },
+    {
+      "id": 35,
+      "name": "Saudi Arabia",
+      "group": "F",
+      "code": "sa",
+      "flag_4x3": "4x3/sa.svg",
+      "flag_1x1": "1x1/sa.svg"
+    },
+    {
+      "id": 36,
+      "name": "Scotland",
+      "group": "E",
+      "code": "gb-sct",
+      "flag_4x3": "4x3/gb-sct.svg",
+      "flag_1x1": "1x1/gb-sct.svg"
+    },
+    {
+      "id": 37,
+      "name": "Senegal",
+      "group": "K",
+      "code": "sn",
+      "flag_4x3": "4x3/sn.svg",
+      "flag_1x1": "1x1/sn.svg"
+    },
+    {
+      "id": 38,
+      "name": "South Africa",
+      "group": "J",
+      "code": "za",
+      "flag_4x3": "4x3/za.svg",
+      "flag_1x1": "1x1/za.svg"
+    },
+    {
+      "id": 39,
+      "name": "South Korea",
+      "group": "J",
+      "code": "kr",
+      "flag_4x3": "4x3/kr.svg",
+      "flag_1x1": "1x1/kr.svg"
+    },
+    {
+      "id": 40,
+      "name": "Spain",
+      "group": "F",
+      "code": "es",
+      "flag_4x3": "4x3/es.svg",
+      "flag_1x1": "1x1/es.svg"
+    },
+    {
+      "id": 41,
+      "name": "Sweden",
+      "group": "L",
+      "code": "se",
+      "flag_4x3": "4x3/se.svg",
+      "flag_1x1": "1x1/se.svg"
+    },
+    {
+      "id": 42,
+      "name": "Switzerland",
+      "group": "D",
+      "code": "ch",
+      "flag_4x3": "4x3/ch.svg",
+      "flag_1x1": "1x1/ch.svg"
+    },
+    {
+      "id": 43,
+      "name": "Tunisia",
+      "group": "L",
+      "code": "tn",
+      "flag_4x3": "4x3/tn.svg",
+      "flag_1x1": "1x1/tn.svg"
+    },
+    {
+      "id": 44,
+      "name": "Turkey",
+      "group": "B",
+      "code": "tr",
+      "flag_4x3": "4x3/tr.svg",
+      "flag_1x1": "1x1/tr.svg"
+    },
+    {
+      "id": 45,
+      "name": "United States",
+      "group": "B",
+      "code": "us",
+      "flag_4x3": "4x3/us.svg",
+      "flag_1x1": "1x1/us.svg"
+    },
+    {
+      "id": 46,
+      "name": "Uruguay",
+      "group": "F",
+      "code": "uy",
+      "flag_4x3": "4x3/uy.svg",
+      "flag_1x1": "1x1/uy.svg"
+    },
+    {
+      "id": 47,
+      "name": "Uzbekistan",
+      "group": "G",
+      "code": "uz",
+      "flag_4x3": "4x3/uz.svg",
+      "flag_1x1": "1x1/uz.svg"
+    }
+  ]
+}
