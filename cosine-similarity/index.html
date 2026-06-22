@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cosine similarity: from the unit circle to RAG</title>
+<style>
+  :root {
+    --ink: #1f2328;
+    --muted: #57606a;
+    --line: #e3e6ea;
+    --bg: #ffffff;
+    --code-bg: #f6f8fa;
+    --out-bg: #fbfcfd;
+    --accent: #2476c4;
+    --green: #2e9e3f;
+    --mono: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #f4f5f7;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.65;
+  }
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--bg);
+    padding: 56px 64px 96px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  header.hero {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 24px;
+    margin-bottom: 36px;
+  }
+  h1 {
+    font-size: 34px;
+    line-height: 1.2;
+    margin: 0 0 12px;
+    letter-spacing: -0.5px;
+  }
+  .lede { font-size: 18px; color: var(--muted); margin: 0; }
+  h2 {
+    font-size: 24px;
+    margin: 48px 0 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    letter-spacing: -0.3px;
+  }
+  h2 .num {
+    display: inline-block;
+    min-width: 1.5em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  h3 { font-size: 18px; margin: 28px 0 6px; }
+  p { margin: 14px 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: var(--mono);
+    font-size: 0.9em;
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 4px;
+  }
+  b.green { color: var(--green); }
+
+  /* notebook cells */
+  .cell { margin: 22px 0; }
+  .cell .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  pre.code {
+    margin: 0;
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  pre.code .c { color: #6e7781; }      /* comment */
+  pre.code .k { color: #cf222e; }      /* keyword */
+  pre.code .s { color: #0a3069; }      /* string  */
+  pre.code .f { color: #8250df; }      /* func    */
+
+  pre.out {
+    margin: 6px 0 0;
+    background: var(--out-bg);
+    border: 1px solid var(--line);
+    border-left: 3px solid #d0d7de;
+    border-radius: 6px;
+    padding: 12px 16px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: #24292f;
+    line-height: 1.5;
+  }
+  .out .rank { color: var(--muted); }
+  .out .word { color: #0a3069; font-weight: 600; }
+  .out .score { color: var(--green); }
+
+  figure { margin: 18px 0; text-align: center; }
+  figure img {
+    max-width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+  .interactive {
+    margin: 22px 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fafafa;
+  }
+  .interactive .bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: #eef6ff;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .interactive .bar .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 3px rgba(46,158,63,.18);
+  }
+  .interactive iframe {
+    width: 100%;
+    height: 820px;
+    border: 0;
+    display: block;
+  }
+  .hint {
+    font-size: 13px;
+    color: var(--muted);
+    background: #f6f8fa;
+    border-left: 3px solid var(--green);
+    border-radius: 0 6px 6px 0;
+    padding: 8px 14px;
+    margin: 10px 0;
+  }
+
+  table.ladder {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 18px 0;
+    font-size: 14px;
+  }
+  table.ladder th, table.ladder td {
+    border: 1px solid var(--line);
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.ladder th { background: var(--code-bg); }
+  table.ladder td:first-child { text-align: center; color: var(--accent); font-weight: 700; }
+
+  blockquote {
+    margin: 16px 0;
+    padding: 2px 16px;
+    border-left: 4px solid var(--line);
+    color: var(--muted);
+  }
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--muted);
+  }
+  @media (max-width: 720px) {
+    main { padding: 32px 20px 64px; }
+    h1 { font-size: 27px; }
+    .interactive iframe { height: 720px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <h1>Cosine similarity: from the unit circle to RAG</h1>
+    <p class="lede">One idea — <b>the cosine of the angle between two vectors</b> —
+      scales from high-school trigonometry all the way to how a retrieval system
+      decides which document answers your question. We climb that ladder one rung
+      at a time, each step with a picture you can regenerate.</p>
+  </header>
+
+  <p>The thread in one line: <b>represent things as vectors, then compare them by
+    the angle between those vectors.</b> Everything below is a runnable notebook —
+    the code cells and their real outputs are reproduced as-is.</p>
+
+  <div class="cell">
+    <div class="label">setup</div>
+<pre class="code"><span class="k">import</span> os
+<span class="k">import</span> numpy <span class="k">as</span> np
+<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+<span class="k">from</span> matplotlib.patches <span class="k">import</span> Arc</pre>
+  </div>
+
+  <!-- ===================================================== -->
+  <h2><span class="num">0.</span> The big picture: how embeddings are learned</h2>
+  <p>The vectors this whole post compares — the ones we'll judge by the angle between
+    them — are <b>learned</b>. Each token is mapped to an embedding vector (just a row
+    looked up in a table), pushed <b style="color:var(--accent)">forward</b> through a
+    fully-connected network to a prediction <code>ŷ</code>, and a
+    <b style="color:#c0392b">loss</b> measures how wrong it is against the target
+    <code>y</code>. <b style="color:#c0392b">Backpropagation</b> then sends gradients
+    <code>∂ℒ/∂W</code> back through every layer — and crucially,
+    <b>back into the embedding table itself</b>. After millions of updates, words used
+    in similar contexts drift to similar vectors. <em>That</em> is why cosine between
+    them ends up meaning something.</p>
+
+  <figure>
+    <img src="nn_embedding_training.svg" alt="Tokens are looked up as embedding vectors, fed forward through fully-connected hidden layers to an output and a loss; backpropagation sends gradients back to update every weight including the embeddings.">
+    <figcaption>Tokens → embeddings (left) → fully-connected network → loss (right). The
+      dashed red sweep is backpropagation: the same gradients that train the weights also
+      reshape the embedding vectors.</figcaption>
+  </figure>
+
+  <p>The rest of this notebook earns that intuition from the ground up — starting with
+    what a vector even is, then what the cosine of the angle between two of them means,
+    and finally seeing the learned word vectors above in action.</p>
+
+  <!-- ===================================================== -->
+  <h2><span class="num">1.</span> Vectors: arrows you can add and subtract</h2>
+  <p>A vector is just an arrow from the origin to a point <code>(x, y)</code>.
+    Adding two vectors is tip-to-tail (the diagonal of the parallelogram);
+    subtracting <code>a − b</code> is the arrow that points from <code>b</code> to
+    <code>a</code>. That's the entire mechanical vocabulary we need.</p>
+
+  <div class="cell">
+    <div class="label">In&nbsp;[1]</div>
+<pre class="code"><span class="k">from</span> scripts.vector_add_subtract <span class="k">import</span> build_figure
+
+fig = <span class="f">build_figure</span>()
+fig</pre>
+  </div>
+  <figure>
+    <img src="output_3_0.png" alt="Vectors: what they are, and how to add and subtract them">
+    <figcaption>A vector as an arrow to <code>(x, y)</code>; <code>a + b</code> as the
+      tip-to-tail diagonal; <code>a − b</code> as the arrow from <code>b</code> to <code>a</code>.</figcaption>
+  </figure>
+
+  <!-- ===================================================== -->
+  <h2><span class="num">2.</span> Cosine starts on the unit circle</h2>
+  <p>Forget vectors for a second. For a point on the unit circle at angle θ, the
+    <b>cosine is simply its x-coordinate</b>. It starts at <code>+1</code> (0°,
+    pointing right), falls through <code>0</code> (90°, straight up), to
+    <code>−1</code> (180°, pointing left).</p>
+
+  <div class="cell">
+    <div class="label">In&nbsp;[2]</div>
+<pre class="code">C_VEC, C_COS, C_DROP = <span class="s">"#1f77b4"</span>, <span class="s">"#2ca02c"</span>, <span class="s">"#999999"</span>
+HIGHLIGHT = 35                       <span class="c"># degrees, the worked example</span>
+MARKS = <span class="f">list</span>(<span class="f">range</span>(0, 360, 45))      <span class="c"># 0,45,...,315</span>
+
+<span class="k">from</span> scripts.unit_circle_cosine <span class="k">import</span> build_figure
+fig = <span class="f">build_figure</span>()
+fig   <span class="c"># shows inline</span></pre>
+  </div>
+
+  <!-- live interactive replaces the static output_5_0.png -->
+  <div class="interactive">
+    <div class="bar"><span class="dot"></span> Live — drag inside the circle to move the angle θ</div>
+    <iframe src="unit_circle_cosine.html" title="Interactive unit circle — cosine" loading="lazy"></iframe>
+  </div>
+  <p class="hint">Move the pointer around the circle: the blue vector has
+    <b>length 1</b>, and its shadow on the x-axis — the thick
+    <b class="green">green</b> vector — <em>is</em> <code>cos θ</code>. Watch the
+    readout cross zero at 90° and flip negative past it.</p>
+
+  <p>That bounded range <code>[−1, +1]</code> is the whole reason cosine makes a
+    convenient similarity score: <code>+1</code> = same direction, <code>0</code> =
+    perpendicular, <code>−1</code> = opposite.</p>
+
+  <!-- ===================================================== -->
+  <h2><span class="num">3.</span> Words become vectors</h2>
+  <p>Word embeddings (word2vec) place each word at a point in a high-dimensional
+    space so that <b>directions carry meaning</b>. Here each word is a 300-dimensional
+    vector — exactly the kind of vector the network in section 0 learns.</p>
+
+  <div class="cell">
+    <div class="label">In&nbsp;[3]</div>
+<pre class="code"><span class="k">from</span> scripts.local_vectors <span class="k">import</span> e, nearest, analogy
+
+e(<span class="s">"king"</span>).shape</pre>
+  </div>
+  <pre class="out">(300,)</pre>
+
+  <p>The famous result <code>king − man + woman ≈ queen</code> isn't an equation —
+    it's a <b>cosine nearest-neighbour</b> search around the computed point.
+    "queen" is simply the highest-cosine neighbour of <code>king − man + woman</code>:</p>
+
+  <div class="cell">
+    <div class="label">In&nbsp;[4]</div>
+<pre class="code"><span class="f">nearest</span>(<span class="f">e</span>(<span class="s">"king"</span>) - <span class="f">e</span>(<span class="s">"man"</span>) + <span class="f">e</span>(<span class="s">"woman"</span>))</pre>
+  </div>
+  <pre class="out"><span class="rank">[</span>(<span class="word">'king'</span>,         <span class="score">0.845</span>),
+ (<span class="word">'queen'</span>,        <span class="score">0.730</span>),
+ (<span class="word">'monarch'</span>,      <span class="score">0.645</span>),
+ (<span class="word">'princess'</span>,     <span class="score">0.616</span>),
+ (<span class="word">'crown_prince'</span>, <span class="score">0.582</span>)<span class="rank">]</span></pre>
+
+  <p>The <code>analogy</code> helper does the same arithmetic but drops the input
+    words from the results, so the intended answer rises to the top:</p>
+
+  <div class="cell">
+    <div class="label">In&nbsp;[5]</div>
+<pre class="code"><span class="f">analogy</span>(<span class="s">"man"</span>, <span class="s">"king"</span>, <span class="s">"woman"</span>)   <span class="c"># man:king :: woman:?</span></pre>
+  </div>
+  <pre class="out"><span class="rank">[</span>(<span class="word">'queen'</span>,        <span class="score">0.730</span>),
+ (<span class="word">'monarch'</span>,      <span class="score">0.645</span>),
+ (<span class="word">'princess'</span>,     <span class="score">0.616</span>),
+ (<span class="word">'crown_prince'</span>, <span class="score">0.578</span>),
+ (<span class="word">'prince'</span>,       <span class="score">0.578</span>)<span class="rank">]</span></pre>
+
+  <h3>It works for morphology and tense, too</h3>
+  <div class="cell">
+    <div class="label">In&nbsp;[6]</div>
+<pre class="code"><span class="f">analogy</span>(<span class="s">"walk"</span>, <span class="s">"walking"</span>, <span class="s">"swim"</span>)</pre>
+  </div>
+  <pre class="out"><span class="rank">[</span>(<span class="word">'swimming'</span>, <span class="score">0.863</span>),
+ (<span class="word">'swam'</span>,     <span class="score">0.721</span>),
+ (<span class="word">'swims'</span>,    <span class="score">0.705</span>),
+ (<span class="word">'swimmers'</span>, <span class="score">0.690</span>),
+ (<span class="word">'paddling'</span>, <span class="score">0.664</span>)<span class="rank">]</span></pre>
+
+  <div class="cell">
+    <div class="label">In&nbsp;[7]</div>
+<pre class="code"><span class="f">analogy</span>(<span class="s">"small"</span>, <span class="s">"smaller"</span>, <span class="s">"big"</span>)</pre>
+  </div>
+  <pre class="out"><span class="rank">[</span>(<span class="word">'bigger'</span>,  <span class="score">0.804</span>),
+ (<span class="word">'larger'</span>,  <span class="score">0.629</span>),
+ (<span class="word">'Bigger'</span>,  <span class="score">0.587</span>),
+ (<span class="word">'biggest'</span>, <span class="score">0.524</span>),
+ (<span class="word">'huge'</span>,     <span class="score">0.520</span>)<span class="rank">]</span></pre>
+
+  <!-- ===================================================== -->
+  <h2><span class="num">4.</span> Paris and Rome — when the geometry is off</h2>
+  <p><code>paris − france + italy</code> <em>should</em> land on <code>rome</code>.
+    Same arithmetic, same cosine search — but the top neighbour is <code>lohan</code>:
+    the "Paris" vector is contaminated by Paris Hilton.</p>
+
+  <div class="cell">
+    <div class="label">In&nbsp;[8]</div>
+<pre class="code"><span class="f">analogy</span>(<span class="s">"paris"</span>, <span class="s">"france"</span>, <span class="s">"rome"</span>)</pre>
+  </div>
+  <pre class="out"><span class="rank">[</span>(<span class="word">'italy'</span>,    <span class="score">0.495</span>),
+ (<span class="word">'european'</span>, <span class="score">0.489</span>),
+ (<span class="word">'italian'</span>,  <span class="score">0.479</span>),
+ (<span class="word">'england'</span>,  <span class="score">0.469</span>),
+ (<span class="word">'italians'</span>, <span class="score">0.464</span>)<span class="rank">]</span></pre>
+
+  <div class="cell">
+    <div class="label">In&nbsp;[9]</div>
+<pre class="code"><span class="f">analogy</span>(<span class="s">"italy"</span>, <span class="s">"rome"</span>, <span class="s">"france"</span>)</pre>
+  </div>
+  <pre class="out"><span class="rank">[</span>(<span class="word">'paris'</span>,   <span class="score">0.435</span>),
+ (<span class="word">'albert'</span>,  <span class="score">0.419</span>),
+ (<span class="word">'toronto'</span>, <span class="score">0.399</span>),
+ (<span class="word">'french'</span>,  <span class="score">0.397</span>),
+ (<span class="word">'donnie'</span>,  <span class="score">0.389</span>)<span class="rank">]</span></pre>
+
+  <figure>
+    <img src="word2vec_analogy_paris.png" alt="paris − france + italy analogy, projected to 2-D">
+    <figcaption>The <code>paris</code> analogy in 2-D (PCA projection — read distances
+      with care). The vocabulary geometry is simply off here.</figcaption>
+  </figure>
+
+  <div class="cell">
+    <div class="label">In&nbsp;[10]</div>
+<pre class="code"><span class="f">nearest</span>(<span class="f">e</span>(<span class="s">"lohan"</span>))</pre>
+  </div>
+  <pre class="out"><span class="rank">[</span>(<span class="word">'lohan'</span>,         <span class="score">1.000</span>),
+ (<span class="word">'lindsay_lohan'</span>, <span class="score">0.698</span>),
+ (<span class="word">'britney'</span>,       <span class="score">0.697</span>),
+ (<span class="word">'heidi'</span>,         <span class="score">0.681</span>),
+ (<span class="word">'charlie_sheen'</span>, <span class="score">0.673</span>)<span class="rank">]</span></pre>
+  <p>A word is exactly cosine <code>1.0</code> with itself — and its neighbours
+    reveal the company it keeps. "lohan" sits among celebrities, which is exactly
+    why it hijacked the Paris analogy.</p>
+
+  <!-- ===================================================== -->
+  <h2><span class="num">5.</span> Try it: search a video library by cosine</h2>
+  <p>Here is the whole post in one widget. Each video's title + description is turned
+    into a <b>TF-IDF vector</b> (one weight per word); your query becomes a vector the
+    same way; and the results are ranked by the <b class="green">cosine</b> of the angle
+    between them — all in your browser, no server. Try
+    <code>machine learning</code>, <code>bake bread</code>, <code>beginner workout</code>,
+    or <code>cheap travel japan</code> and watch the ranking reshuffle.</p>
+  <p><b>Typing</b> runs the <b>bag-of-words</b> version, so it matches on <em>shared
+    words, not meaning</em>: type <code>fix a leaking faucet</code> and you get nothing,
+    because the right video says "dripping tap" and "worn washer" — no word in common.
+    Now open the <b>✨ Semantic suggestions</b> dropdown. Those ten queries were each
+    embedded once, offline, with <b>BGE-M3</b> (the same encoder real RAG systems use);
+    the page ships only the resulting 1024-d vectors. Pick <em>"how do I fix a leaky
+    faucet"</em> and the <em>identical</em> cosine — now over learned embeddings instead
+    of word counts — floats the plumbing videos ("Clear a Slow Drain", "Stop a Dripping
+    Tap") to the top. Same geometry, better vectors.</p>
+
+  <style>
+    .vsearch { margin: 20px 0 8px; }
+    .vsearch .searchbar { position: relative; }
+    .vsearch .searchbar input {
+      width: 100%; box-sizing: border-box;
+      padding: 13px 18px 13px 44px;
+      font-size: 16px; font-family: inherit;
+      border: 1.5px solid var(--line); border-radius: 30px;
+      background: #fff; outline: none; transition: border-color .15s, box-shadow .15s;
+    }
+    .vsearch .searchbar input:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px rgba(36,118,196,.12);
+    }
+    .vsearch .searchbar svg {
+      position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+      color: var(--muted);
+    }
+    .vsearch .vmeta { font-size: 13px; color: var(--muted); margin: 10px 4px 16px; }
+    .vsearch .vgrid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+      gap: 22px 18px;
+    }
+    .vcard { display: block; color: inherit; text-decoration: none; }
+    .vcard:hover h4 { color: var(--accent); }
+    .vcard .thumb {
+      position: relative; aspect-ratio: 16 / 9; border-radius: 11px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .vcard .thumb .play {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(0,0,0,.55); display: flex; align-items: center; justify-content: center;
+      transition: background .15s, transform .15s;
+    }
+    .vcard:hover .thumb .play { background: rgba(196,40,38,.92); transform: scale(1.08); }
+    .vcard .thumb .play::after {
+      content: ""; border-style: solid; border-width: 8px 0 8px 13px;
+      border-color: transparent transparent transparent #fff; margin-left: 3px;
+    }
+    .vcard .thumb .dur {
+      position: absolute; right: 6px; bottom: 6px; background: rgba(0,0,0,.82);
+      color: #fff; font-size: 11px; padding: 1px 5px; border-radius: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+    .vcard .thumb .score {
+      position: absolute; left: 6px; top: 6px; background: var(--green);
+      color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+      font-variant-numeric: tabular-nums; box-shadow: 0 1px 3px rgba(0,0,0,.25);
+    }
+    .vcard h4 {
+      margin: 11px 0 3px; font-size: 14.5px; line-height: 1.32; font-weight: 600;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      transition: color .15s;
+    }
+    .vcard .ch { font-size: 12.5px; color: var(--muted); }
+    .vcard p.d {
+      font-size: 12.5px; color: var(--muted); margin: 5px 0 0; line-height: 1.4;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .vcard mark { background: #fff1a8; color: inherit; padding: 0 1px; border-radius: 2px; }
+    .vsearch .vempty { color: var(--muted); padding: 28px 4px; }
+    .vsearch .controls { display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap; }
+    .vsearch .controls .searchbar { flex: 1 1 280px; }
+    .vsearch select#vsug {
+      flex: 0 0 auto; max-width: 100%;
+      padding: 12px 36px 12px 16px; font-size: 14px; font-family: inherit; font-weight: 600;
+      color: var(--accent); background-color: #eef6ff;
+      border: 1.5px solid #cfe3fb; border-radius: 30px; cursor: pointer; outline: none;
+      -webkit-appearance: none; appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%232476c4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>');
+      background-repeat: no-repeat; background-position: right 13px center;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .vsearch select#vsug:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(36,118,196,.12); }
+    .vsearch select#vsug:disabled { opacity: .5; cursor: not-allowed; }
+    .vcard .thumb .score.sem { background: var(--accent); }
+  </style>
+
+  <div class="vsearch">
+    <div class="controls">
+      <div class="searchbar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input id="vq" type="search" autocomplete="off"
+               placeholder="Type to search (bag-of-words) — e.g. “sourdough”, “budget money”…">
+      </div>
+      <select id="vsug" aria-label="Pre-embedded semantic queries (BGE-M3)">
+        <option value="">✨ Semantic suggestions (BGE-M3)…</option>
+      </select>
+    </div>
+    <div class="vmeta" id="vmeta"></div>
+    <div class="vgrid" id="vgrid"></div>
+  </div>
+
+<script src="search_bundle.js"></script>
+<script>
+(function () {
+  const VIDEOS = [
+    {id:"v001",title:"Artisan Sourdough Bread from Scratch",description:"A slow-fermented loaf with a crackling crust and open crumb. We cover starter feeding, autolyse, stretch-and-folds, and baking in a Dutch oven."},
+    {id:"v002",title:"No-Knead Crusty Loaf for Beginners",description:"The easiest way to bake a bakery-style loaf at home. Just flour, water, salt, and yeast left to rise overnight — no mixer, no kneading."},
+    {id:"v003",title:"Perfect Fluffy Rice Every Time",description:"Stop ending up with mushy or burnt grains. The ratio, the rinse, and the resting step that make rice come out light and separate."},
+    {id:"v004",title:"Stop a Dripping Tap in Ten Minutes",description:"That constant drip from the kitchen mixer is usually a worn washer or cartridge. A basic plumbing repair anyone can do with a single wrench."},
+    {id:"v005",title:"Clear a Slow Drain Without Chemicals",description:"Standing water in the sink? Pull the trap, snake the pipe, and flush it clean using tools you already own instead of caustic liquids."},
+    {id:"v006",title:"Paint a Room Like a Professional",description:"Cutting in clean edges, rolling without lap marks, and choosing the right finish. Prep and patience are ninety percent of a flawless wall."},
+    {id:"v007",title:"Build a Semantic Search Engine with Embeddings",description:"Turn documents into dense vectors, store them, and retrieve the closest matches by cosine similarity. A practical guide to meaning-based retrieval."},
+    {id:"v008",title:"Intro to Machine Learning: Linear Regression",description:"Fit a line to data with gradient descent, understand the loss surface, and interpret the coefficients. Your first supervised learning model."},
+    {id:"v009",title:"How Database Indexes Speed Up Queries",description:"Why a B-tree turns a full table scan into a logarithmic lookup, when an index helps, and when it just slows down your writes."},
+    {id:"v010",title:"Learn the Zig Programming Language in One Hour",description:"A fast tour of Zig: comptime, manual memory with allocators, error unions, and building a tiny command-line tool from an empty file."},
+    {id:"v011",title:"Full-Body Workout with No Equipment",description:"Build strength in your living room with no gym and no weights. Push, squat, hinge, and core moves you can scale from beginner to advanced."},
+    {id:"v012",title:"Couch to 5K: A Beginner Running Plan",description:"An eight-week schedule that eases you from walking into running a full five kilometers without injury or burnout."},
+    {id:"v013",title:"Mobility Routine for People Who Sit All Day",description:"Counter the stiffness of office life. Gentle hip openers, thoracic rotations, and neck releases to undo hours hunched at a desk."},
+    {id:"v014",title:"Index Funds Explained for Beginners",description:"Why owning the whole market through a low-cost fund beats picking stocks for most people. Diversification, expense ratios, and getting started."},
+    {id:"v015",title:"The Power of Compound Interest Over Time",description:"How small amounts set aside early snowball into large sums decades later. The math of growth and why starting young matters most."},
+    {id:"v016",title:"Build a Monthly Budget That Actually Sticks",description:"Track where your paycheck goes, split needs from wants, and automate the boring parts so you spend less without feeling deprived."},
+    {id:"v017",title:"Tokyo on Fifty Dollars a Day",description:"Eat well, sleep cheap, and ride the rails across Japan's capital on a tight budget. Hostels, conveyor sushi, and free city views."},
+    {id:"v018",title:"Backpacking Across Southeast Asia",description:"Three months through Thailand, Vietnam, and Cambodia. Night buses, street food, and the route that kept costs under a thousand a month."},
+    {id:"v019",title:"Ten Hidden Beaches in the Mediterranean",description:"Skip the crowded resorts. Secluded coves and turquoise water you can only reach by a short hike or a local ferry."},
+    {id:"v020",title:"iPhone 16 Pro: The Honest Review",description:"Camera, battery, and the new action button after a month of daily use. Who should upgrade and who should keep what they have."},
+    {id:"v021",title:"Best Noise-Cancelling Headphones of the Year",description:"We tested the top over-ear models for commute, office, and travel. Sound quality, comfort, and which one silences a plane the best."},
+    {id:"v022",title:"Master Aperture, Shutter Speed, and ISO",description:"The exposure triangle demystified. Dial in these three controls by hand to freeze motion, blur backgrounds, and shoot in low light."},
+    {id:"v023",title:"Apple Vision Pro: Is It Worth It?",description:"Weeks with the headset for work and entertainment. The stunning display, the weight, the price, and whether it earns a place in your life."}
+  ];
+  const CHANNELS = ["Home Kitchen","FixItRight","DevSimplified","ML Foundations","TrailWander","MoneyWise","MoveDaily","GearLab"];
+
+  // --- tiny TF-IDF + cosine index (the whole point of the post) ---
+  const STOP = new Set("a an the and or of to in on for with without is are be by you your we our it this that from at as into how but just like can do down up out".split(" "));
+  const tokenize = t => (t.toLowerCase().match(/[a-z0-9]+/g) || []).filter(w => w.length > 1 && !STOP.has(w));
+  // weight the title more heavily than the description
+  const docToks = VIDEOS.map(v => tokenize(v.title + " " + v.title + " " + v.description));
+  const N = docToks.length, df = Object.create(null);
+  docToks.forEach(toks => new Set(toks).forEach(w => df[w] = (df[w] || 0) + 1));
+  const idf = w => Math.log((N + 1) / ((df[w] || 0) + 1)) + 1;
+  function vec(toks) {
+    const tf = Object.create(null);
+    toks.forEach(w => tf[w] = (tf[w] || 0) + 1);
+    const v = Object.create(null); let norm = 0;
+    for (const w in tf) { const x = tf[w] * idf(w); v[w] = x; norm += x * x; }
+    norm = Math.sqrt(norm) || 1;
+    for (const w in v) v[w] /= norm;
+    return v;
+  }
+  const docVecs = docToks.map(vec);
+  function cosine(a, b) {
+    const [s, big] = Object.keys(a).length < Object.keys(b).length ? [a, b] : [b, a];
+    let dot = 0; for (const w in s) if (w in big) dot += s[w] * big[w];
+    return dot;
+  }
+
+  // --- deterministic, fake-but-stable card metadata ---
+  function hash(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = (h * 16777619) >>> 0; } return h; }
+  function duration(h) { const m = 4 + (h % 17), s = h % 60; return m + ":" + String(s).padStart(2, "0"); }
+  function views(h) { const n = 18000 + (h % 3600000); return n >= 1e6 ? (n / 1e6).toFixed(1) + "M views" : Math.round(n / 1000) + "K views"; }
+  const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  function highlight(text, terms) {
+    let out = esc(text);
+    if (terms.length) out = out.replace(new RegExp("\\b(" + terms.join("|") + ")", "gi"), "<mark>$1</mark>");
+    return out;
+  }
+
+  const gridEl = document.getElementById("vgrid");
+  const metaEl = document.getElementById("vmeta");
+  const inputEl = document.getElementById("vq");
+  const sugEl = document.getElementById("vsug");
+
+  // --- pre-embedded semantic queries (real BGE-M3 vectors, int8) from search_bundle.js ---
+  const BUNDLE = window.VIDEO_SEARCH || null;
+  function decodeVec(q8, scale) {           // base64 int8 -> unit Float32 vector
+    const s = atob(q8), n = s.length, v = new Float32Array(n);
+    let norm = 0;
+    for (let i = 0; i < n; i++) { let b = s.charCodeAt(i); if (b > 127) b -= 256; const x = b * scale / 127; v[i] = x; norm += x * x; }
+    norm = Math.sqrt(norm) || 1;
+    for (let i = 0; i < n; i++) v[i] /= norm;
+    return v;
+  }
+  let SEM = null, URLS = null;
+  if (BUNDLE) {
+    const vidVec = Object.create(null);
+    URLS = Object.create(null);
+    BUNDLE.videos.forEach(v => { vidVec[v.id] = decodeVec(v.q8, BUNDLE.scale); URLS[v.id] = v.url; });
+    SEM = { vidVec, queries: BUNDLE.queries.map(q => ({ id: q.id, text: q.text, note: q.note, vec: decodeVec(q.q8, BUNDLE.scale) })) };
+    SEM.queries.forEach((q, i) => { const o = document.createElement("option"); o.value = String(i); o.textContent = q.text; sugEl.appendChild(o); });
+  } else {
+    sugEl.disabled = true;
+  }
+  const dot = (a, b) => { let d = 0; for (let i = 0; i < a.length; i++) d += a[i] * b[i]; return d; };
+
+  let mode = "lexical", semQ = null;
+
+  function card(v, score, terms, sem) {
+    const h = hash(v.id), hue = h % 360;
+    const a = document.createElement("a");
+    a.className = "vcard";
+    a.href = (URLS && URLS[v.id]) || ("https://www.youtube.com/results?search_query=" + encodeURIComponent(v.title));
+    a.target = "_blank"; a.rel = "noopener";
+    a.innerHTML =
+      '<div class="thumb" style="background:linear-gradient(135deg,hsl(' + hue + ',58%,55%),hsl(' + ((hue + 38) % 360) + ',64%,44%))">' +
+        (score != null ? '<span class="score' + (sem ? ' sem' : '') + '">cos ' + score.toFixed(2) + '</span>' : '') +
+        '<span class="play"></span><span class="dur">' + duration(h) + '</span>' +
+      '</div>' +
+      '<h4>' + highlight(v.title, terms) + '</h4>' +
+      '<div class="ch">' + CHANNELS[h % CHANNELS.length] + ' · ' + views(h) + '</div>' +
+      '<p class="d">' + highlight(v.description, terms) + '</p>';
+    return a;
+  }
+
+  function paint(rows, terms, sem) {
+    gridEl.innerHTML = "";
+    const frag = document.createDocumentFragment();
+    rows.forEach(r => frag.appendChild(card(r.v, r.score, terms, sem)));
+    gridEl.appendChild(frag);
+  }
+
+  function render() {
+    // --- semantic mode: a pre-embedded query was picked from the dropdown ---
+    if (mode === "semantic" && semQ && SEM) {
+      const rows = VIDEOS.map(v => ({ v, score: dot(semQ.vec, SEM.vidVec[v.id]) }))
+                         .sort((a, b) => b.score - a.score);
+      metaEl.innerHTML = 'Ranked by cosine over <b style="color:var(--accent)">BGE-M3 embeddings</b> · pre-embedded query “' + esc(semQ.text) + '”'
+        + (semQ.note ? ' — <span>' + esc(semQ.note) + '</span>' : '');
+      paint(rows, [], true);
+      return;
+    }
+    // --- lexical mode: live TF-IDF over whatever is typed ---
+    const q = inputEl.value.trim(), terms = tokenize(q);
+    if (!terms.length) {
+      metaEl.innerHTML = VIDEOS.length + " videos · type to rank by <b>TF-IDF</b> cosine, or pick a pre-embedded semantic query →";
+      paint(VIDEOS.map(v => ({ v, score: null })), [], false);
+      return;
+    }
+    const qv = vec(terms);
+    const rows = VIDEOS.map((v, i) => ({ v, score: cosine(qv, docVecs[i]) }))
+                       .filter(r => r.score > 0.001).sort((a, b) => b.score - a.score);
+    if (!rows.length) {
+      metaEl.innerHTML = 'No bag-of-words matches for “' + esc(q) + '”';
+      gridEl.innerHTML = '<div class="vempty">Nothing scored above zero — no title or description shares a word with your query. '
+        + 'This is exactly where lexical search fails and embeddings win: pick a <b>✨ Semantic suggestion</b> to see the same cosine over BGE-M3 vectors succeed.</div>';
+      return;
+    }
+    metaEl.innerHTML = rows.length + ' result' + (rows.length > 1 ? 's' : '') + ' for “' + esc(q) + '” · ranked by cosine over <b>TF-IDF</b> (bag-of-words)';
+    paint(rows, terms, false);
+  }
+
+  inputEl.addEventListener("input", () => { mode = "lexical"; semQ = null; sugEl.value = ""; render(); });
+  sugEl.addEventListener("change", () => {
+    if (!SEM || sugEl.value === "") { mode = "lexical"; semQ = null; render(); return; }
+    semQ = SEM.queries[Number(sugEl.value)];
+    mode = "semantic";
+    inputEl.value = semQ.text;          // show the chosen query in the box
+    render();
+  });
+  render();
+})();
+</script>
+
+  <!-- ===================================================== -->
+  <h2>The whole ladder</h2>
+  <table class="ladder">
+    <thead>
+      <tr><th>Step</th><th>The "thing"</th><th>Its vector</th><th>Compared by</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>an angle</td><td>a point on the unit circle</td><td>cos θ = x-coordinate</td></tr>
+      <tr><td>2</td><td>two arrows</td><td>2-D coordinates</td><td>cos θ = a·b / (‖a‖‖b‖)</td></tr>
+      <tr><td>4</td><td>(any vectors)</td><td>normalised → unit length</td><td>cosine = normalised dot product</td></tr>
+      <tr><td>5</td><td>a <b>word</b></td><td>word2vec embedding (300-d)</td><td>cosine nearest neighbour</td></tr>
+      <tr><td>6</td><td>a <b>sentence / chunk</b></td><td>trained-encoder embedding</td><td>cosine nearest neighbour</td></tr>
+    </tbody>
+  </table>
+  <p>Every rung uses the <b>same</b> comparison — the cosine of the angle. What
+    changes going up the ladder is only <b>how the thing becomes a vector</b>:
+    trig → learned word vectors → a trained text encoder. Master the bottom rung
+    and the top one is the same move in disguise.</p>
+
+  <footer>
+    Companion deep-dives: cosine-vs-euclidean · rag-intuition. Figures regenerated
+    from <code>sub-scripts/</code>; the unit-circle panel above is the live
+    <code>unit_circle_cosine.html</code> widget.
+  </footer>
+</main>
+</body>
+</html>
