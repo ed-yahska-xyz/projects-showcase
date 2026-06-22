@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive unit circle — cosine</title>
+<style>
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #fafafa;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 16px;
+  }
+  #wrap {
+    position: relative;
+  }
+  canvas {
+    cursor: crosshair;
+    touch-action: none;
+  }
+  .formula {
+    margin-top: 18px;
+    border: 2px solid #2e9e3f;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 16px;
+    background: #f3fbf4;
+  }
+  .formula b { color: #2e9e3f; }
+</style>
+</head>
+<body>
+  <h1>Cosine is the x-coordinate on the unit circle</h1>
+  <div id="wrap">
+    <canvas id="c" width="640" height="640"></canvas>
+  </div>
+  <div class="formula">
+    cos θ = adjacent / hypotenuse = x / 1 = <b id="cosval">+1.00</b>
+  </div>
+
+<script>
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+const cosvalEl = document.getElementById("cosval");
+
+const SIZE = 640;
+const CX = SIZE / 2;
+const CY = SIZE / 2;
+const R = 240;               // radius of the unit circle in pixels
+const TICK_DEG = [0, 45, 90, 135, 180, 225, 270, 315];
+
+// current pointer angle (radians, math convention: CCW from +x axis)
+let angle = Math.PI / 8;     // start around 22.5° so it looks like the reference
+
+function colorForCos(cos) {
+  // green for positive, yellow near zero, red for negative — like the reference dots
+  if (cos > 0.3)  return "#2e9e3f";
+  if (cos < -0.3) return "#c0392b";
+  if (cos > 0)    return "#7fb800";
+  if (cos < 0)    return "#e74c3c";
+  return "#f7f0a0";
+}
+
+function toCanvas(x, y) {
+  // math coords (origin center, y up) -> canvas coords (y down)
+  return [CX + x * R, CY - y * R];
+}
+
+function draw() {
+  ctx.clearRect(0, 0, SIZE, SIZE);
+
+  // --- axes ---
+  ctx.strokeStyle = "#bbb";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(CX, 20); ctx.lineTo(CX, SIZE - 20);
+  ctx.moveTo(20, CY); ctx.lineTo(SIZE - 20, CY);
+  ctx.stroke();
+
+  // --- unit circle ---
+  ctx.strokeStyle = "#7a7a7a";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(CX, CY, R, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // --- tick dots + labels ---
+  ctx.font = "13px sans-serif";
+  ctx.textAlign = "center";
+  for (const deg of TICK_DEG) {
+    const a = deg * Math.PI / 180;
+    const cos = Math.cos(a);
+    const [px, py] = toCanvas(Math.cos(a), Math.sin(a));
+
+    ctx.beginPath();
+    ctx.arc(px, py, 9, 0, Math.PI * 2);
+    ctx.fillStyle = colorForCos(cos);
+    ctx.fill();
+    ctx.strokeStyle = "#444";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // label position, pushed outward from the circle
+    const lx = CX + Math.cos(a) * (R + 42);
+    const ly = CY - Math.sin(a) * (R + 42);
+    ctx.fillStyle = "#333";
+    ctx.fillText(deg + "°", lx, ly - 6);
+    ctx.fillText("cos=" + (cos >= 0 ? "+" : "") + cos.toFixed(2), lx, ly + 9);
+  }
+
+  const cos = Math.cos(angle);
+  const sin = Math.sin(angle);
+  const [tipX, tipY] = toCanvas(cos, sin);
+  const [projX, projY] = toCanvas(cos, 0);
+
+  // --- reference vector (orange) — points along +x or -x depending on the pointer ---
+  const refSign = cos >= 0 ? 1 : -1;
+  drawArrow(CX, CY, CX + refSign * R, CY, "#d68910", 4);
+
+  // --- projection of cos onto x-axis (thick green vector) ---
+  if (Math.abs(cos) > 0.001) {
+    drawArrow(CX, CY, projX, projY, "#2e9e3f", 5);
+  }
+
+  // --- dashed drop line from tip to x-axis ---
+  ctx.strokeStyle = "#999";
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([6, 5]);
+  ctx.beginPath();
+  ctx.moveTo(tipX, tipY);
+  ctx.lineTo(projX, projY);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // --- angle arc ---
+  ctx.strokeStyle = "#444";
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  // canvas arc uses CW-positive angles, so negate
+  ctx.arc(CX, CY, 46, 0, -angle, angle > 0);
+  ctx.stroke();
+
+  // --- the blue vector (follows the mouse) ---
+  drawArrow(CX, CY, tipX, tipY, "#2476c4", 4);
+
+  // --- labels on the vectors ---
+  ctx.save();
+  ctx.translate(CX, CY);
+  ctx.rotate(-angle);
+  ctx.fillStyle = "#2476c4";
+  ctx.font = "bold 16px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("length 1", R * 0.5, -12);
+  ctx.restore();
+
+  // θ label near the arc
+  ctx.fillStyle = "#333";
+  ctx.font = "italic 18px serif";
+  ctx.textAlign = "left";
+  ctx.fillText("θ", CX + 56, CY - 14);
+
+  // cos θ label under x-axis
+  ctx.fillStyle = "#2e9e3f";
+  ctx.font = "bold 16px sans-serif";
+  ctx.textAlign = "center";
+  const midProjX = (CX + projX) / 2;
+  ctx.fillText("cos θ", midProjX, CY + 28);
+
+  ctx.fillStyle = "#d68910";
+  ctx.fillText("reference vector", CX + refSign * R * 0.5, CY + 48);
+
+  // update the formula readout
+  cosvalEl.textContent = (cos >= 0 ? "+" : "") + cos.toFixed(2);
+}
+
+function drawArrow(x1, y1, x2, y2, color, width) {
+  const head = 14;
+  const ang = Math.atan2(y2 - y1, x2 - x1);
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  ctx.lineWidth = width;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - head * Math.cos(ang - Math.PI / 6), y2 - head * Math.sin(ang - Math.PI / 6));
+  ctx.lineTo(x2 - head * Math.cos(ang + Math.PI / 6), y2 - head * Math.sin(ang + Math.PI / 6));
+  ctx.closePath();
+  ctx.fill();
+}
+
+function updateAngleFromEvent(e) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  const mx = (e.clientX - rect.left) * scaleX;
+  const my = (e.clientY - rect.top) * scaleY;
+  // convert to math coords and take the angle
+  angle = Math.atan2(CY - my, mx - CX);
+  draw();
+}
+
+canvas.addEventListener("mousemove", updateAngleFromEvent);
+canvas.addEventListener("pointermove", updateAngleFromEvent);
+
+draw();
+</script>
+</body>
+</html>
