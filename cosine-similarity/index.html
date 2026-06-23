@@ -50,6 +50,11 @@
     border-top: 1px solid var(--line);
     letter-spacing: -0.3px;
   }
+  h2.first {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
   h2 .num {
     display: inline-block;
     min-width: 1.5em;
@@ -160,20 +165,50 @@
     margin: 10px 0;
   }
 
-  table.ladder {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 18px 0;
-    font-size: 14px;
+  .topics-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 700;
+    margin: 22px 0 10px;
   }
-  table.ladder th, table.ladder td {
+  ul.topics {
+    list-style: none;
+    margin: 0 0 8px;
+    padding: 0;
+    counter-reset: topic;
+  }
+  ul.topics li {
+    position: relative;
+    counter-increment: topic;
+    background: var(--code-bg);
     border: 1px solid var(--line);
-    padding: 8px 12px;
-    text-align: left;
-    vertical-align: top;
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 12px 16px 12px 52px;
+    margin: 8px 0;
+    font-size: 16px;
+    font-weight: 500;
   }
-  table.ladder th { background: var(--code-bg); }
-  table.ladder td:first-child { text-align: center; color: var(--accent); font-weight: 700; }
+  ul.topics li::before {
+    content: counter(topic);
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-variant-numeric: tabular-nums;
+  }
 
   blockquote {
     margin: 16px 0;
@@ -199,23 +234,19 @@
 <main>
   <header class="hero">
     <h1>Cosine similarity: from the unit circle to RAG</h1>
-    <p class="lede">One idea — <b>the cosine of the angle between two vectors</b> —
-      scales from high-school trigonometry all the way to how a retrieval system
-      decides which document answers your question. We climb that ladder one rung
-      at a time, each step with a picture you can regenerate.</p>
   </header>
 
-  <p>The thread in one line: <b>represent things as vectors, then compare them by
-    the angle between those vectors.</b> Everything below is a runnable notebook —
-    the code cells and their real outputs are reproduced as-is.</p>
-
-  <div class="cell">
-    <div class="label">setup</div>
-<pre class="code"><span class="k">import</span> os
-<span class="k">import</span> numpy <span class="k">as</span> np
-<span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
-<span class="k">from</span> matplotlib.patches <span class="k">import</span> Arc</pre>
-  </div>
+  <h2 class="first">Introduction</h2>
+  <p>This article talks about the science behind <b>RAG</b>, i.e. Retrieval Augmented
+    Generation. RAG is a powerful method to augment LLM context with relevant data.</p>
+  <p class="topics-title">Topics</p>
+  <ul class="topics">
+    <li>Recap of what learning means in a neural network</li>
+    <li>Vectors and vector operations like addition, subtraction and the dot product</li>
+    <li>How words can be represented as vectors, and what the same operations mean in this domain</li>
+    <li>Expanding this idea towards sentences</li>
+    <li>Finally, a couple of demos seeing this in practice</li>
+  </ul>
 
   <!-- ===================================================== -->
   <h2><span class="num">0.</span> The big picture: how embeddings are learned</h2>
@@ -401,7 +432,25 @@ e(<span class="s">"king"</span>).shape</pre>
     why it hijacked the Paris analogy.</p>
 
   <!-- ===================================================== -->
-  <h2><span class="num">5.</span> Try it: search a video library by cosine</h2>
+  <h2><span class="num">5.</span> Sentences become vectors — the RAG retrieval step</h2>
+  <p>Words were the previous rung; the next is whole <b>sentences</b>. A trained encoder
+    (here <code>all-MiniLM-L6-v2</code>) maps each sentence to a single vector, and we
+    score every pair by the <b class="green">cosine</b> of the angle between them. The
+    heatmap below is exactly that pairwise cosine matrix — the diagonal is
+    <code>1.00</code> (every sentence is identical to itself), and the bright off-diagonal
+    blocks are sentences that mean the same thing even when they share almost no words.</p>
+
+  <figure>
+    <img src="sentence_similarity.png" alt="A 6×6 heatmap of pairwise sentence cosine similarities computed with the all-MiniLM-L6-v2 encoder; semantically related sentence pairs light up green while unrelated pairs stay red.">
+    <figcaption>Pairwise sentence cosine similarity (<code>all-MiniLM-L6-v2</code>).
+      The three thematic pairs — cats, the stock market, and Python — each light up
+      (<code>0.60</code>, <code>0.57</code>, <code>0.30</code>) despite differing wording,
+      while cross-topic pairs stay near zero. <b>This is the RAG retrieval step</b>:
+      embed a query, then take its highest-cosine neighbours.</figcaption>
+  </figure>
+
+  <!-- ===================================================== -->
+  <h2><span class="num">6.</span> Try it: search a video library by cosine</h2>
   <p>Here is the whole post in one widget. Each video's title + description is turned
     into a <b>TF-IDF vector</b> (one weight per word); your query becomes a vector the
     same way; and the results are ranked by the <b class="green">cosine</b> of the angle
@@ -673,24 +722,19 @@ e(<span class="s">"king"</span>).shape</pre>
 })();
 </script>
 
-  <!-- ===================================================== -->
-  <h2>The whole ladder</h2>
-  <table class="ladder">
-    <thead>
-      <tr><th>Step</th><th>The "thing"</th><th>Its vector</th><th>Compared by</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>1</td><td>an angle</td><td>a point on the unit circle</td><td>cos θ = x-coordinate</td></tr>
-      <tr><td>2</td><td>two arrows</td><td>2-D coordinates</td><td>cos θ = a·b / (‖a‖‖b‖)</td></tr>
-      <tr><td>4</td><td>(any vectors)</td><td>normalised → unit length</td><td>cosine = normalised dot product</td></tr>
-      <tr><td>5</td><td>a <b>word</b></td><td>word2vec embedding (300-d)</td><td>cosine nearest neighbour</td></tr>
-      <tr><td>6</td><td>a <b>sentence / chunk</b></td><td>trained-encoder embedding</td><td>cosine nearest neighbour</td></tr>
-    </tbody>
-  </table>
-  <p>Every rung uses the <b>same</b> comparison — the cosine of the angle. What
-    changes going up the ladder is only <b>how the thing becomes a vector</b>:
-    trig → learned word vectors → a trained text encoder. Master the bottom rung
-    and the top one is the same move in disguise.</p>
+  <h2>Recap</h2>
+  <ul class="topics">
+    <li><b>Learning in a neural network</b> — training nudges an embedding table via
+      backpropagation until words used in similar contexts land on similar vectors.</li>
+    <li><b>Vectors and their operations</b> — arrows you can add and subtract, and whose
+      dot product (normalised) is the cosine of the angle between them.</li>
+    <li><b>Words as vectors</b> — word2vec places words so directions carry meaning, and
+      the same arithmetic does analogies like <code>king − man + woman ≈ queen</code>.</li>
+    <li><b>Sentences as vectors</b> — a trained encoder maps whole sentences to vectors,
+      so cosine flags pairs that mean the same thing even with no shared words.</li>
+    <li><b>Demos in practice</b> — the video search and the sentence heatmap show this
+      cosine ranking running live, which is exactly the retrieval step behind RAG.</li>
+  </ul>
 
   <footer>
     Companion deep-dives: cosine-vs-euclidean · rag-intuition. Figures regenerated
